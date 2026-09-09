@@ -8,6 +8,7 @@ import { Preloader } from './components/ui/Preloader';
 import { CustomCursor } from './components/ui/CustomCursor';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
+import { Analytics } from '@vercel/analytics/react';
 
 import { ForexHeroSection } from './components/sections/ForexHeroSection';
 import { TraderProfile } from './components/sections/TraderProfile';
@@ -92,6 +93,9 @@ export function App() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Vercel Analytics */}
+      <Analytics />
     </div>
   );
 }

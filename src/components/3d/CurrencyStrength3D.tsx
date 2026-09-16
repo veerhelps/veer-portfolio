@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Box, Html } from '@react-three/drei';
+import * as THREE from 'three';
 import { currencyStrengthMatrix } from '../../data/currencyStrength';
 
 function StrengthPillar({ item, index, total }: { item: typeof currencyStrengthMatrix[0]; index: number; total: number }) {
@@ -34,11 +35,11 @@ function StrengthPillar({ item, index, total }: { item: typeof currencyStrengthM
 
 export function CurrencyStrength3D() {
   return (
-    <div className="w-full h-[320px] rounded-2xl border border-obsidian-800 bg-obsidian-950 overflow-hidden relative">
-      <div className="absolute top-4 left-4 z-10 font-mono text-xs text-stone-400">
+    <div className="w-full h-[260px] sm:h-[320px] rounded-2xl border border-obsidian-800 bg-obsidian-950 overflow-hidden relative">
+      <div className="absolute top-3 sm:top-4 left-3 sm:left-4 z-10 font-mono text-[10px] sm:text-xs text-stone-400">
         3D CURRENCY STRENGTH MATRIX <span className="text-gold">● RELATIVE SCORE</span>
       </div>
-      <Canvas camera={{ position: [0, 2, 7.5], fov: 45 }}>
+      <Canvas camera={{ position: [0, 1.8, 8.2], fov: 48 }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[5, 5, 5]} intensity={1} color="#D6B45A" />
         {currencyStrengthMatrix.map((item, i) => (

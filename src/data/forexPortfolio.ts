@@ -43,17 +43,17 @@ export const openForexPositions: ForexPosition[] = [
   },
   {
     id: 'pos-2',
-    pair: 'GBP/USD',
-    direction: 'LONG',
-    entryPrice: 1.2785,
-    stopLoss: 1.2740,
-    takeProfit: 1.2910,
-    currentPrice: 1.2840,
+    pair: 'GBP/JPY',
+    direction: 'SHORT',
+    entryPrice: 198.40,
+    stopLoss: 199.10,
+    takeProfit: 196.20,
+    currentPrice: 196.80,
     lotSize: 1.8,
     riskUsd: 810,
-    rrRatio: '1 : 2.8',
-    pnlUsd: 990,
-    pnlPct: 0.79,
+    rrRatio: '1 : 3.1',
+    pnlUsd: 1440,
+    pnlPct: 1.15,
     status: 'OPEN'
   },
   {
@@ -69,6 +69,21 @@ export const openForexPositions: ForexPosition[] = [
     rrRatio: '1 : 3.0',
     pnlUsd: 1125,
     pnlPct: 0.90,
+    status: 'OPEN'
+  },
+  {
+    id: 'pos-4',
+    pair: 'USD/JPY',
+    direction: 'SHORT',
+    entryPrice: 154.20,
+    stopLoss: 154.80,
+    takeProfit: 152.60,
+    currentPrice: 153.20,
+    lotSize: 2.0,
+    riskUsd: 800,
+    rrRatio: '1 : 2.7',
+    pnlUsd: 1000,
+    pnlPct: 0.80,
     status: 'OPEN'
   }
 ];

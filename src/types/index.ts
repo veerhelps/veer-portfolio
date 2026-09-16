@@ -128,3 +128,22 @@ export interface ForexPortfolioSummary {
   totalTrades: number;
   equityCurve: { date: string; valueUsd: number; drawdownPct: number }[];
 }
+
+export interface MacroCardItem {
+  id: string;
+  headline: string;
+  tag: string;
+  oneSentence: string;
+  currencyImpact: string;
+  bias: 'BULLISH' | 'BEARISH' | 'VOLATILE';
+}
+
+export interface EditorialQuote {
+  quote: string;
+  author?: string;
+  subtitle?: string;
+  accent?: 'gold' | 'crimson' | 'cream';
+}
+
+export type TradeEntry = ForexTradeJournalEntry;
+

@@ -5,49 +5,50 @@ interface PreloaderProps {
 }
 
 export function Preloader({ onComplete }: PreloaderProps) {
-  const [step, setStep] = useState(0);
-  const steps = ['INITIALIZING MARKET OBSERVATORY', 'LOADING DATA STRUCTURE', 'CALCULATING RISK PARAMETERS', 'SYSTEM READY'];
+  const [fading, setFading] = useState(false);
 
   useEffect(() => {
-    const timer1 = setTimeout(() => setStep(1), 500);
-    const timer2 = setTimeout(() => setStep(2), 1100);
-    const timer3 = setTimeout(() => setStep(3), 1700);
-    const timer4 = setTimeout(() => {
+    const fadeTimer = setTimeout(() => {
+      setFading(true);
+    }, 600);
+
+    const finishTimer = setTimeout(() => {
       onComplete();
-    }, 2300);
+    }, 900);
 
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-      clearTimeout(timer4);
+      clearTimeout(fadeTimer);
+      clearTimeout(finishTimer);
     };
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 z-[10000] bg-obsidian-950 flex flex-col items-center justify-center font-mono">
-      <div className="relative flex flex-col items-center">
-        {/* Pulsing Core Sphere */}
-        <div className="w-16 h-16 rounded-full border border-gold/40 flex items-center justify-center animate-pulse-slow mb-8 gold-glow-md">
-          <div className="w-8 h-8 rounded-full bg-gold-gradient animate-ping opacity-60" />
+    <div
+      className={`fixed inset-0 z-[10000] bg-obsidian-950 flex flex-col items-center justify-center font-mono transition-opacity duration-300 ${
+        fading ? 'opacity-0 pointer-events-none' : 'opacity-100'
+      }`}
+    >
+      <div className="flex flex-col items-center select-none">
+        {/* Sleek Minimal Emblem */}
+        <div className="w-12 h-12 rounded-xl bg-obsidian-900 border border-gold/50 flex items-center justify-center mb-6 shadow-[0_0_25px_rgba(214,180,90,0.15)]">
+          <span className="font-display font-black text-gold text-base tracking-tighter">VX</span>
         </div>
 
-        <div className="text-xs text-stone-400 tracking-widest mb-2">VEER / MARKET OBSERVATORY</div>
-        <div className="text-sm font-semibold text-gold tracking-wider h-6 transition-all duration-300">
-          {steps[step]}
+        <div className="text-xs font-bold text-cream tracking-[0.25em] uppercase mb-1">
+          VAXSA FOREX OBSERVATORY
+        </div>
+        <div className="text-[10px] text-gold tracking-widest uppercase mb-6 font-semibold">
+          DHARAM VEER SINGH KIRAR
         </div>
 
-        {/* Progress Bar */}
-        <div className="w-64 h-1 bg-obsidian-800 rounded-full mt-6 overflow-hidden">
-          <div
-            className="h-full bg-gold-gradient transition-all duration-500 ease-out"
-            style={{ width: `${((step + 1) / steps.length) * 100}%` }}
-          />
+        {/* Minimal Thin Loading Bar */}
+        <div className="w-48 h-[2px] bg-obsidian-800 rounded-full overflow-hidden">
+          <div className="h-full bg-gold-gradient animate-pulse w-full" />
         </div>
 
-        <div className="mt-8 text-[10px] text-stone-400 tracking-widest flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-market animate-pulse" />
-          <span>PORTFOLIO SYSTEM OS v4.2</span>
+        <div className="mt-6 text-[9px] text-stone-500 tracking-widest flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-market animate-pulse" />
+          <span>INITIALIZING OBSERVATORY GATEWAY</span>
         </div>
       </div>
     </div>

@@ -4,123 +4,107 @@ import { TrendingUp, Award, Shield, ArrowUpRight } from 'lucide-react';
 
 export function ForexDashboardSection() {
   return (
-    <section id="portfolio" className="py-24 bg-obsidian-950 border-t border-obsidian-800 relative">
+    <section id="portfolio" className="py-28 sm:py-36 bg-transparent border-t border-white/[0.08] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <div>
             <div className="flex items-center gap-2 font-mono text-xs text-gold mb-3">
               <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-              <span>SECTION 06 — ACCOUNT CAPITAL</span>
+              <span className="tracking-widest uppercase font-semibold">SECTION 07 — LIVE POSITION MATRIX</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display text-stone-100 tracking-tight">
-              FOREX PORTFOLIO <span className="text-gold-gradient">DASHBOARD</span>
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-black text-cream tracking-tight">
+              THE <span className="text-gold-gradient">PORTFOLIO</span>
             </h2>
           </div>
 
-          <div className="font-mono text-xs text-right text-stone-400">
-            BASE CURRENCY: <span className="text-gold font-bold">USD ($) • AUDITED AUDIT</span>
+          <div className="font-mono text-xs text-left sm:text-right text-stone-400">
+            BASE DENOMINATION: <span className="text-cream font-bold">USD ($)</span> • <span className="text-gold">DEMO AUDIT</span>
           </div>
         </div>
 
-        {/* Top Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="md:col-span-2 p-8 rounded-2xl bg-obsidian-900 border border-gold/40 gold-glow-md flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between text-xs font-mono text-stone-400 mb-2">
-                <span>TOTAL CAPITAL EQUITY</span>
-                <span className="text-gold bg-gold/10 px-2 py-0.5 rounded border border-gold/20 font-bold">ACCOUNT NAV</span>
-              </div>
-              <div className="text-4xl sm:text-6xl font-black font-mono text-stone-100 tracking-tight mb-4">
-                ${forexPortfolioSummary.accountValueUsd.toLocaleString('en-US')}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 pt-6 border-t border-obsidian-850 font-mono text-xs">
-              <div>
-                <span className="text-stone-500 block text-[10px]">TODAY'S P&L</span>
-                <span className="text-emerald-market font-bold text-lg sm:text-xl flex items-center gap-1">
-                  +${forexPortfolioSummary.todayPnlUsd.toLocaleString('en-US')} <span className="text-xs font-normal">(+{forexPortfolioSummary.todayPnlPct}%)</span>
-                </span>
-              </div>
-              <div>
-                <span className="text-stone-500 block text-[10px]">CUMULATIVE RETURN</span>
-                <span className="text-gold font-bold text-lg sm:text-xl flex items-center gap-1">
-                  +{forexPortfolioSummary.totalReturnPct}% <ArrowUpRight size={16} />
-                </span>
-              </div>
-            </div>
+        {/* Compact Key Metrics Bar */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-8 font-mono text-xs">
+          <div className="p-3.5 sm:p-4 rounded-xl bg-obsidian-900 border border-obsidian-800">
+            <span className="text-stone-500 block text-[9px] sm:text-[10px] uppercase">ACCOUNT VALUE</span>
+            <span className="text-lg sm:text-xl font-bold text-cream">${forexPortfolioSummary.accountValueUsd.toLocaleString('en-US')}</span>
+            <span className="text-[9px] text-stone-500 block mt-0.5">NET NAV</span>
           </div>
 
-          {/* System Metrics */}
-          <div className="p-8 rounded-2xl bg-obsidian-900 border border-obsidian-800 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between text-xs font-mono text-stone-400 mb-4">
-                <span className="flex items-center gap-2 text-gold"><Award size={16} /> AUDITED STATS</span>
-                <span className="text-stone-500">LIVE DEMO</span>
-              </div>
+          <div className="p-3.5 sm:p-4 rounded-xl bg-obsidian-900 border border-obsidian-800">
+            <span className="text-stone-500 block text-[9px] sm:text-[10px] uppercase">TODAY'S P&L</span>
+            <span className="text-lg sm:text-xl font-bold text-emerald-market">+${forexPortfolioSummary.todayPnlUsd.toLocaleString('en-US')}</span>
+            <span className="text-[9px] text-emerald-market/80 block mt-0.5">+{forexPortfolioSummary.todayPnlPct}%</span>
+          </div>
 
-              <div className="space-y-4 font-mono">
-                <div className="flex justify-between items-center border-b border-obsidian-850 pb-3">
-                  <span className="text-stone-400 text-xs">WIN RATE</span>
-                  <span className="text-stone-100 font-bold text-lg">{forexPortfolioSummary.winRatePct}%</span>
-                </div>
-                <div className="flex justify-between items-center border-b border-obsidian-850 pb-3">
-                  <span className="text-stone-400 text-xs">PROFIT FACTOR</span>
-                  <span className="text-gold font-bold text-lg">{forexPortfolioSummary.profitFactor}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-stone-400 text-xs">MAX DRAWDOWN</span>
-                  <span className="text-coral-market font-bold text-lg">{forexPortfolioSummary.maxDrawdownPct}%</span>
-                </div>
-              </div>
-            </div>
+          <div className="p-3.5 sm:p-4 rounded-xl bg-obsidian-900 border border-obsidian-800">
+            <span className="text-stone-500 block text-[9px] sm:text-[10px] uppercase">TOTAL RETURN</span>
+            <span className="text-lg sm:text-xl font-bold text-gold">+{forexPortfolioSummary.totalReturnPct}%</span>
+            <span className="text-[9px] text-stone-500 block mt-0.5">ANNUALIZED</span>
+          </div>
 
-            <div className="mt-6 pt-4 border-t border-obsidian-850 text-[10px] font-mono text-stone-500">
-              TOTAL TRADES EXECUTED: {forexPortfolioSummary.totalTrades}
-            </div>
+          <div className="p-3.5 sm:p-4 rounded-xl bg-obsidian-900 border border-obsidian-800">
+            <span className="text-stone-500 block text-[9px] sm:text-[10px] uppercase">WIN RATE</span>
+            <span className="text-lg sm:text-xl font-bold text-cream">{forexPortfolioSummary.winRatePct}%</span>
+            <span className="text-[9px] text-stone-500 block mt-0.5">{forexPortfolioSummary.totalTrades} TRADES</span>
+          </div>
+
+          <div className="p-3.5 sm:p-4 rounded-xl bg-obsidian-900 border border-obsidian-800">
+            <span className="text-stone-500 block text-[9px] sm:text-[10px] uppercase">PROFIT FACTOR</span>
+            <span className="text-lg sm:text-xl font-bold text-gold">{forexPortfolioSummary.profitFactor}</span>
+            <span className="text-[9px] text-stone-500 block mt-0.5">GROSS RATIO</span>
+          </div>
+
+          <div className="p-3.5 sm:p-4 rounded-xl bg-obsidian-900 border border-obsidian-800">
+            <span className="text-stone-500 block text-[9px] sm:text-[10px] uppercase">MAX DRAWDOWN</span>
+            <span className="text-lg sm:text-xl font-bold text-coral-market">{forexPortfolioSummary.maxDrawdownPct}%</span>
+            <span className="text-[9px] text-stone-500 block mt-0.5">PEAK TO TROUGH</span>
           </div>
         </div>
 
-        {/* Open Forex Positions Table */}
+        {/* Compact Positions Table */}
         <div className="overflow-x-auto rounded-2xl border border-obsidian-800 bg-obsidian-900/60 backdrop-blur-md shadow-2xl">
-          <table className="w-full text-left border-collapse font-mono text-xs">
+          <table className="w-full text-left border-collapse font-mono text-xs min-w-[640px]">
             <thead>
               <tr className="border-b border-obsidian-800 text-stone-400 bg-obsidian-950/80">
-                <th className="py-4 px-6 font-semibold">PAIR</th>
-                <th className="py-4 px-6 font-semibold">DIRECTION</th>
-                <th className="py-4 px-6 font-semibold text-right">ENTRY</th>
-                <th className="py-4 px-6 font-semibold text-right">STOP LOSS</th>
-                <th className="py-4 px-6 font-semibold text-right">TAKE PROFIT</th>
-                <th className="py-4 px-6 font-semibold text-right">CURRENT</th>
-                <th className="py-4 px-6 font-semibold text-right">LOT SIZE</th>
-                <th className="py-4 px-6 font-semibold text-right">RISK / REWARD</th>
-                <th className="py-4 px-6 font-semibold text-right">P&L (USD)</th>
+                <th className="py-3.5 px-6 font-semibold">PAIR</th>
+                <th className="py-3.5 px-6 font-semibold">DIRECTION</th>
+                <th className="py-3.5 px-6 font-semibold text-right">ENTRY</th>
+                <th className="py-3.5 px-6 font-semibold text-right">STOP</th>
+                <th className="py-3.5 px-6 font-semibold text-right">TARGET</th>
+                <th className="py-3.5 px-6 font-semibold text-right">CURRENT</th>
+                <th className="py-3.5 px-6 font-semibold text-right">P&L (USD)</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-obsidian-850">
-              {openForexPositions.map((pos) => (
-                <tr key={pos.id} className="hover:bg-obsidian-850/80 transition">
-                  <td className="py-4 px-6 font-bold text-stone-100">{pos.pair}</td>
-                  <td className="py-4 px-6">
-                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                      pos.direction === 'LONG' ? 'bg-emerald-market/20 text-emerald-market' : 'bg-coral-market/20 text-coral-market'
-                    }`}>
-                      {pos.direction}
-                    </span>
-                  </td>
-                  <td className="py-4 px-6 text-right text-stone-300">{pos.entryPrice}</td>
-                  <td className="py-4 px-6 text-right text-coral-market">{pos.stopLoss}</td>
-                  <td className="py-4 px-6 text-right text-emerald-market">{pos.takeProfit}</td>
-                  <td className="py-4 px-6 text-right font-bold text-stone-100">{pos.currentPrice}</td>
-                  <td className="py-4 px-6 text-right text-stone-300">{pos.lotSize} LOTS</td>
-                  <td className="py-4 px-6 text-right text-gold font-semibold">{pos.rrRatio}</td>
-                  <td className="py-4 px-6 text-right font-bold text-emerald-market">
-                    +${pos.pnlUsd.toLocaleString('en-US')} (+{pos.pnlPct}%)
-                  </td>
-                </tr>
-              ))}
+              {openForexPositions.map((pos) => {
+                const isLong = pos.direction === 'LONG';
+                return (
+                  <tr key={pos.id} className="hover:bg-obsidian-850/60 transition">
+                    <td className="py-4 px-6 font-bold text-cream">{pos.pair}</td>
+                    <td className="py-4 px-6">
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                        isLong ? 'bg-emerald-market/15 text-emerald-market' : 'bg-coral-market/15 text-coral-market'
+                      }`}>
+                        {pos.direction}
+                      </span>
+                    </td>
+                    <td className="py-4 px-6 text-right text-stone-300">{pos.entryPrice}</td>
+                    <td className="py-4 px-6 text-right text-coral-market">{pos.stopLoss}</td>
+                    <td className="py-4 px-6 text-right text-emerald-market">{pos.takeProfit}</td>
+                    <td className="py-4 px-6 text-right font-bold text-cream">{pos.currentPrice}</td>
+                    <td className="py-4 px-6 text-right font-bold text-emerald-market">
+                      +${pos.pnlUsd.toLocaleString('en-US')} <span className="text-[10px] font-normal text-stone-400">(+{pos.pnlPct}%)</span>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
+        </div>
+
+        {/* Demo Data Notice */}
+        <div className="mt-4 text-right font-mono text-[10px] text-stone-600">
+          ● DEMO DATA AUDIT // LIVE PRICING MIRRORED VIA LDN-01 GATEWAY
         </div>
       </div>
     </section>

@@ -48,24 +48,27 @@ export function CustomCursor() {
     <>
       {/* Inner Dot Cursor */}
       <div
-        className="fixed pointer-events-none z-[9999] w-2 h-2 bg-gold rounded-full transition-transform duration-75 ease-out"
+        className="fixed pointer-events-none z-[9999] w-2 h-2 rounded-full transition-transform duration-75 ease-out shadow-sm"
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
           transform: `translate(-50%, -50%) scale(${isHovered ? 1.8 : 1})`,
+          backgroundColor: 'var(--theme-accent, #D6B45A)',
+          boxShadow: '0 0 8px var(--theme-accent, #D6B45A)',
         }}
       />
       {/* Outer Glowing Ring */}
       <div
-        className={`fixed pointer-events-none z-[9998] rounded-full border transition-all duration-200 ease-out ${
-          isHovered
-            ? 'w-10 h-10 border-gold/70 bg-gold/10'
-            : 'w-6 h-6 border-gold/30 bg-transparent'
-        }`}
+        className="fixed pointer-events-none z-[9998] rounded-full border transition-all duration-200 ease-out"
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
           transform: 'translate(-50%, -50%)',
+          width: isHovered ? '2.5rem' : '1.5rem',
+          height: isHovered ? '2.5rem' : '1.5rem',
+          borderColor: 'var(--theme-border, rgba(214, 180, 90, 0.4))',
+          backgroundColor: isHovered ? 'var(--theme-glow, rgba(214, 180, 90, 0.15))' : 'transparent',
+          boxShadow: isHovered ? '0 0 16px var(--theme-glow, rgba(214, 180, 90, 0.3))' : 'none',
         }}
       />
     </>

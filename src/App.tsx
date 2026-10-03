@@ -8,6 +8,8 @@ import { Preloader } from './components/ui/Preloader';
 import { CustomCursor } from './components/ui/CustomCursor';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
+import { CommandMenu } from './components/ui/CommandMenu';
+import { ScrollProgressRail } from './components/ui/ScrollProgressRail';
 import { Analytics } from '@vercel/analytics/react';
 import { ChromaticAmbientCanvas } from './components/ui/ChromaticAmbientCanvas';
 
@@ -37,6 +39,7 @@ import { ThemeProvider } from './context/ThemeContext';
 
 export function App() {
   const [loading, setLoading] = useState(true);
+  const [isCommandOpen, setIsCommandOpen] = useState(false);
 
   useEffect(() => {
     // Initialize Lenis Smooth Scroll with fine-tuned inertia
@@ -60,24 +63,46 @@ export function App() {
     };
   }, []);
 
+  // Global / key listener for Command Menu
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) {
+        e.preventDefault();
+        setIsCommandOpen((prev) => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <ThemeProvider>
       <div className="bg-transparent text-cream min-h-screen relative font-sans selection:bg-gold/25 selection:text-gold overflow-x-hidden">
-        {/* Dynamic Chromatic Ambient Canvas (Reference Palettes Aura Engine) */}
+        {/* Dynamic Chromatic Ambient Canvas */}
         <ChromaticAmbientCanvas />
 
         {/* Preloader */}
         {loading && <Preloader onComplete={() => setLoading(false)} />}
 
-        {/* Reticle Custom Cursor */}
+        {/* Reticle Custom Cursor with Contextual Badges */}
         <CustomCursor />
 
+        {/* Vertical Scroll Progress Rail & Observatory Chapter Indicator */}
+        <ScrollProgressRail />
+
+        {/* Terminal Quick Jump Command Menu */}
+        <CommandMenu
+          isOpen={isCommandOpen}
+          onClose={() => setIsCommandOpen(false)}
+        />
+
         {/* Compact Floating Editorial Navigation */}
-        <Navbar />
+        <Navbar onOpenCommand={() => setIsCommandOpen(true)} />
 
         {/* Main Continuous Forex Poster Sequence */}
         <main className="relative z-10">
-          {/* HERO: Asymmetrical Poster Composition + 3D Financial Artifact */}
+          {/* HERO: Asymmetrical Poster Composition + 3D Currency Core */}
           <ForexHeroSection />
 
           {/* TRANSITION STATEMENT 01 */}
@@ -91,10 +116,10 @@ export function App() {
           {/* SECTION 01: IDENTITY / OPERATOR PROFILE */}
           <TraderProfile />
 
-          {/* SECTION 02: "THE CURRENCY IS ALWAYS WATCHING" */}
+          {/* SECTION 02: "EVERY CURRENCY HAS A STORY" */}
           <CurrencyWatchingSection />
 
-          {/* SECTION 03: THE FOREX UNIVERSE */}
+          {/* SECTION 03: THE FOREX UNIVERSE CONSTELLATION */}
           <GlobalForexMarket />
 
           {/* SECTION 04: CURRENCY STRENGTH MATRIX */}
@@ -114,7 +139,7 @@ export function App() {
           {/* SECTION 06: LIQUIDITY — SIGNATURE CRIMSON MOMENT */}
           <LiquiditySection />
 
-          {/* SECTION 07: THE PORTFOLIO */}
+          {/* SECTION 07: THE PORTFOLIO & FLOATING 3D TILES */}
           <ForexDashboardSection />
 
           {/* SECTION 08: THE EQUITY CURVE */}
@@ -128,7 +153,7 @@ export function App() {
             index="03"
           />
 
-          {/* SECTION 09: THE TRADE JOURNAL & FULL-SCREEN DETAIL */}
+          {/* SECTION 09: THE TRADE JOURNAL & FILTER MATRIX */}
           <ForexJournalSection />
 
           {/* SECTION 10: THE MACRO LAYER & EVENT RADAR */}
@@ -137,7 +162,7 @@ export function App() {
           {/* SECTION 11: TRADING PSYCHOLOGY — HIGH TYPOGRAPHY & NEGATIVE SPACE */}
           <PsychologySection />
 
-          {/* SECTION 12: VEER CURRICULUM */}
+          {/* SECTION 12: VEER CURRICULUM ARCHITECTURE */}
           <PlaybookCurriculumSection />
 
           {/* SECTION 13: MENTORSHIP PRICING & ONBOARDING */}
@@ -152,8 +177,6 @@ export function App() {
           {/* FINAL SCREEN: READ THE MARKET. BUILD THE PROCESS. */}
           <FinalCTASection />
         </main>
-
-
 
         {/* Footer */}
         <Footer />

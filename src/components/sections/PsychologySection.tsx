@@ -1,49 +1,97 @@
-import React from 'react';
-import { Eye, ShieldAlert } from 'lucide-react';
+import React, { useState } from 'react';
+import { ShieldAlert, Zap, Compass } from 'lucide-react';
 
-const mentalArchitectures = [
+interface MindTopic {
+  id: string;
+  topic: string;
+  statement: string;
+  rule: string;
+  accent: 'crimson' | 'gold' | 'cream';
+  bgTint: string;
+}
+
+const mentalArchitectures: MindTopic[] = [
   {
+    id: 'fomo',
     topic: 'FOMO',
-    statement: 'Chasing a candle in motion is surrendering your statistical edge.',
+    statement: 'Chasing an aggressive green candle in motion is surrendering your edge to market makers waiting to distribute into retail urgency.',
     rule: 'NEVER CHASE DISPLACEMENT',
-    accent: 'crimson'
+    accent: 'crimson',
+    bgTint: 'rgba(181, 30, 37, 0.08)',
   },
   {
+    id: 'revenge',
     topic: 'REVENGE',
-    statement: 'A loss is an operational business cost. Attempting to extract immediate redemption destroys accounts.',
+    statement: 'A loss is an operational cost of doing business. Attempting immediate redemption distorts execution size and obliterates accounts.',
     rule: 'MANDATORY 24-HR LIQUIDITY COOLDOWN',
-    accent: 'crimson'
+    accent: 'crimson',
+    bgTint: 'rgba(181, 30, 37, 0.06)',
   },
   {
+    id: 'overtrading',
     topic: 'OVERTRADING',
-    statement: 'High-frequency execution is the hallmark of retail agitation. The master waits for session alignment.',
+    statement: 'High-frequency execution is retail agitation. The sovereign operator waits patiently for London Open and New York session alignment.',
     rule: 'MAXIMUM 2 EXECUTIONS PER DAY',
-    accent: 'gold'
+    accent: 'gold',
+    bgTint: 'rgba(214, 180, 90, 0.06)',
   },
   {
-    topic: 'FEAR & GREED',
-    statement: 'Both are biological distortions of a mechanical probability engine. Let the stop protect; let the target fulfill.',
+    id: 'fear',
+    topic: 'FEAR',
+    statement: 'Hesitating at a confirmed high-probability model invalidates statistical expectancy. Let the hard stop manage the downside automatically.',
+    rule: 'SURRENDER OUTCOME TO PROBABILITY',
+    accent: 'gold',
+    bgTint: 'rgba(214, 180, 90, 0.05)',
+  },
+  {
+    id: 'greed',
+    topic: 'GREED',
+    statement: 'Extending profit targets arbitrarily beyond algorithmic liquidity pools transforms winning trades into round-tripped breakeven exits.',
     rule: 'MECHANICAL TARGET DISCIPLINE',
-    accent: 'gold'
+    accent: 'crimson',
+    bgTint: 'rgba(181, 30, 37, 0.07)',
   },
   {
+    id: 'patience',
     topic: 'PATIENCE',
-    statement: 'The market does not owe you an entry. Sitting in 100% cash is a fully intentional position.',
-    rule: 'CASH IS AN ALPHA POSITION',
-    accent: 'cream'
+    statement: 'The market does not owe you an entry. Sitting in 100% cash throughout an entire weekly cycle is an active, disciplined, alpha position.',
+    rule: 'CASH IS AN INTENTIONAL POSITION',
+    accent: 'cream',
+    bgTint: 'rgba(250, 247, 242, 0.04)',
   },
   {
+    id: 'discipline',
     topic: 'DISCIPLINE',
-    statement: 'Anyone can enter a trade; only the elite execute the identical risk model over 1,000 iterations without deviation.',
+    statement: 'Anyone can enter a lucky trade; only the elite execute the identical 1.0% risk framework over 1,000 continuous iterations without deviation.',
     rule: 'CONSISTENCY OVER CERTAINTY',
-    accent: 'cream'
-  }
+    accent: 'cream',
+    bgTint: 'rgba(214, 180, 90, 0.07)',
+  },
 ];
 
 export function PsychologySection() {
+  const [activeTopic, setActiveTopic] = useState<MindTopic | null>(null);
+
   return (
-    <section id="psychology" className="py-28 sm:py-36 bg-transparent border-t border-white/[0.08] relative select-none">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="psychology"
+      className="py-28 sm:py-36 bg-transparent border-t border-white/[0.08] relative select-none transition-colors duration-500"
+      style={{
+        backgroundColor: activeTopic ? activeTopic.bgTint : 'transparent',
+      }}
+    >
+      {/* Dynamic Background Glow on Word Hover */}
+      <div
+        className="absolute inset-0 pointer-events-none transition-opacity duration-700 blur-3xl opacity-0"
+        style={{
+          opacity: activeTopic ? 0.35 : 0,
+          background: activeTopic?.accent === 'crimson'
+            ? 'radial-gradient(circle at 50% 50%, rgba(181,30,37,0.2), transparent 70%)'
+            : 'radial-gradient(circle at 50% 50%, rgba(214,180,90,0.18), transparent 70%)',
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex items-center gap-2 font-mono text-xs text-crimson mb-4">
           <span className="w-2 h-2 rounded-full bg-crimson animate-pulse" />
           <span className="tracking-widest uppercase font-semibold">SECTION 11 — MENTAL ARCHITECTURE</span>
@@ -66,17 +114,36 @@ export function PsychologySection() {
           {mentalArchitectures.map((item, idx) => {
             const isCrimson = item.accent === 'crimson';
             const isGold = item.accent === 'gold';
+            const isHovered = activeTopic?.id === item.id;
+
             return (
               <div
-                key={item.topic}
-                className="py-10 sm:py-12 grid grid-cols-1 lg:grid-cols-12 gap-6 items-baseline group hover:bg-obsidian-900/30 transition-colors px-4 -mx-4 rounded-xl"
+                key={item.id}
+                onMouseEnter={() => setActiveTopic(item)}
+                onMouseLeave={() => setActiveTopic(null)}
+                className={`py-8 sm:py-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-baseline group transition-all duration-300 px-4 -mx-4 rounded-2xl cursor-default ${
+                  isHovered ? 'bg-obsidian-900/60 pl-6' : 'hover:bg-obsidian-900/20'
+                }`}
+                data-cursor="VIEW"
               >
-                {/* Topic Indicator */}
+                {/* Topic Indicator (Typography Hover Target) */}
                 <div className="lg:col-span-3 flex items-baseline gap-4">
                   <span className="font-mono text-xs text-stone-600">0{idx + 1}</span>
-                  <h3 className={`font-display font-extrabold text-2xl sm:text-3xl tracking-tight transition-colors ${
-                    isCrimson ? 'text-crimson' : isGold ? 'text-gold' : 'text-cream'
-                  }`}>
+                  <h3
+                    className={`font-display font-black text-2xl sm:text-4xl tracking-tight transition-all duration-200 ${
+                      isHovered
+                        ? isCrimson
+                          ? 'text-crimson scale-105'
+                          : isGold
+                          ? 'text-gold scale-105'
+                          : 'text-cream scale-105'
+                        : isCrimson
+                        ? 'text-stone-300 group-hover:text-crimson'
+                        : isGold
+                        ? 'text-stone-300 group-hover:text-gold'
+                        : 'text-stone-300 group-hover:text-cream'
+                    }`}
+                  >
                     {item.topic}
                   </h3>
                 </div>
@@ -89,9 +156,11 @@ export function PsychologySection() {
                 {/* Operator Rule Flag */}
                 <div className="lg:col-span-3 font-mono text-[11px] text-left lg:text-right text-stone-400">
                   <span className="text-stone-500 block text-[9px] uppercase tracking-wider">MANDATORY RULE</span>
-                  <span className={`font-bold tracking-wider ${
-                    isCrimson ? 'text-crimson' : isGold ? 'text-gold' : 'text-cream'
-                  }`}>
+                  <span
+                    className={`font-bold tracking-wider ${
+                      isCrimson ? 'text-crimson' : isGold ? 'text-gold' : 'text-cream'
+                    }`}
+                  >
                     {item.rule}
                   </span>
                 </div>

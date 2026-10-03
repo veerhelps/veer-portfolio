@@ -1,68 +1,102 @@
-import { MacroCardItem } from '../types';
+export interface DetailedMacroTopic {
+  id: string;
+  name: string;
+  category: 'CENTRAL_BANK' | 'ECONOMIC_METRIC';
+  tag: string;
+  whatItIs: string;
+  whyItMatters: string;
+  currenciesAffected: string;
+}
 
-export const macroLayerItems: MacroCardItem[] = [
+export const macroLayerTopics: DetailedMacroTopic[] = [
   {
-    id: 'macro-1',
-    headline: 'Central Bank Interest Rates',
-    tag: 'BENCHMARK POLICY',
-    oneSentence: 'Benchmark yields drive global yield-differentials and institutional sovereign capital reallocation across fiat currencies.',
-    currencyImpact: 'High interest rate expectations strengthen the national currency via carry-trade inflows and treasury demand.',
-    bias: 'BULLISH'
+    id: 'interest-rates',
+    name: 'Interest Rates',
+    category: 'CENTRAL_BANK',
+    tag: 'SOVEREIGN BENCHMARK',
+    whatItIs: 'The benchmark cost of borrowing set by national central banks to control monetary liquidity and balance sheet expansion.',
+    whyItMatters: 'Global institutional capital flows toward higher yields; interest rate divergence drives primary long-term Forex trends.',
+    currenciesAffected: 'All G8 Currencies (USD, EUR, GBP, JPY, CHF, AUD, CAD, NZD)',
   },
   {
-    id: 'macro-2',
-    headline: 'Consumer Price Index (CPI)',
-    tag: 'INFLATION REGIME',
-    oneSentence: 'Core and headline inflation prints dictate the urgency of monetary tightening or emergency rate reduction cycles.',
-    currencyImpact: 'Hotter-than-forecast CPI increases hike probabilities, triggering instant USD and EUR repricing.',
-    bias: 'VOLATILE'
+    id: 'inflation',
+    name: 'Inflation',
+    category: 'ECONOMIC_METRIC',
+    tag: 'PURCHASING POWER',
+    whatItIs: 'The rate of aggregate price increases eroding sovereign currency purchasing power across goods and services.',
+    whyItMatters: 'Forces central banks into aggressive tightening cycles or emergency policy pivots to prevent stagflation spirals.',
+    currenciesAffected: 'USD, EUR, GBP, AUD, NZD',
   },
   {
-    id: 'macro-3',
-    headline: 'Non-Farm Payrolls (NFP)',
-    tag: 'US LABOUR LIQUIDITY',
-    oneSentence: 'The benchmark monthly indicator of US employment health, wage expansion, and aggregate economic momentum.',
-    currencyImpact: 'Massive volatility driver across EUR/USD, GBP/USD, and Spot Gold on the first Friday of each month.',
-    bias: 'VOLATILE'
+    id: 'employment',
+    name: 'Employment',
+    category: 'ECONOMIC_METRIC',
+    tag: 'LABOR DYNAMICS',
+    whatItIs: 'Unemployment rates, wage growth velocity, and aggregate workforce participation measures.',
+    whyItMatters: 'A tight labor market fuels domestic consumption and persistent wage-push inflation, sustaining hawkish rate policy.',
+    currenciesAffected: 'USD, GBP, CAD, AUD',
   },
   {
-    id: 'macro-4',
-    headline: 'Federal Reserve (FOMC)',
-    tag: 'WORLD RESERVE ANCHOR',
-    oneSentence: 'Dot plots, summary of economic projections, and press conferences define global risk sentiment and dollar liquidity.',
-    currencyImpact: 'Hawkish Fed stance strengthens USD across G8 majors; dovish pivots spark commodity & gold rallies.',
-    bias: 'BULLISH'
+    id: 'gdp',
+    name: 'GDP (Gross Domestic Product)',
+    category: 'ECONOMIC_METRIC',
+    tag: 'ECONOMIC OUTPUT',
+    whatItIs: 'The total monetary market value of all finished goods and sovereign services produced within a national border.',
+    whyItMatters: 'Confirms sovereign macroeconomic expansion versus recessionary contraction, directing multi-month investment cycles.',
+    currenciesAffected: 'USD, EUR, GBP, JPY, CAD',
   },
   {
-    id: 'macro-5',
-    headline: 'European Central Bank (ECB)',
-    tag: 'EUROZONE GOVERNANCE',
-    oneSentence: 'Governing Council rate decisions balancing German industrial output with Mediterranean sovereign bond spreads.',
-    currencyImpact: 'Primary volatility impulse for EUR/USD and EUR/GBP order flow structures.',
-    bias: 'BEARISH'
+    id: 'cpi',
+    name: 'CPI (Consumer Price Index)',
+    category: 'ECONOMIC_METRIC',
+    tag: 'RETAIL INFLATION',
+    whatItIs: 'The primary statistical measure examining the weighted average prices of a consumer basket of consumer goods.',
+    whyItMatters: 'The single most volatile monthly inflation print, dictating immediate rate hike or cut probabilities.',
+    currenciesAffected: 'EUR/USD, GBP/USD, USD/JPY, Spot Gold (XAU/USD)',
   },
   {
-    id: 'macro-6',
-    headline: 'Bank of Japan (BOJ)',
-    tag: 'YIELD CURVE CONTROL',
-    oneSentence: 'Unwinding negative interest rate policy and managing direct currency intervention thresholds against extreme Yen depreciation.',
-    currencyImpact: 'Sudden multi-hundred pip reversals on USD/JPY, GBP/JPY, and EUR/JPY when intervention orders trigger.',
-    bias: 'VOLATILE'
+    id: 'nfp',
+    name: 'NFP (Non-Farm Payrolls)',
+    category: 'ECONOMIC_METRIC',
+    tag: 'US PAYROLL MOMENTUM',
+    whatItIs: 'Monthly statistical tally of newly added paid US workers excluding farm employees, government officials, and non-profits.',
+    whyItMatters: 'Released first Friday of each month; triggers massive algorithmic liquidity sweeps and session volatility spikes.',
+    currenciesAffected: 'USD, EUR/USD, GBP/USD, USD/JPY, XAU/USD',
   },
   {
-    id: 'macro-7',
-    headline: 'Bank of England (BOE)',
-    tag: 'STERLING EQUILIBRIUM',
-    oneSentence: 'Monetary Policy Committee votes balancing persistent UK services inflation against structural stagflation headwinds.',
-    currencyImpact: 'Key catalyst for GBP/USD and cross-pair GBP/JPY momentum shifts.',
-    bias: 'BEARISH'
+    id: 'fomc',
+    name: 'FOMC (Federal Open Market Committee)',
+    category: 'CENTRAL_BANK',
+    tag: 'US CENTRAL BANK',
+    whatItIs: 'The monetary policy-setting body of the Federal Reserve System consisting of 12 voting governors and regional presidents.',
+    whyItMatters: 'Sets the benchmark Fed Funds Rate and controls global dollar supply; establishes global macroeconomic risk sentiment.',
+    currenciesAffected: 'USD (Direct), Global Financial Markets',
   },
   {
-    id: 'macro-8',
-    headline: 'Gross Domestic Product (GDP)',
-    tag: 'SOVEREIGN EXPANSION',
-    oneSentence: 'Quarterly annualized economic output measurements validating either soft-landing trajectories or recessionary contraction.',
-    currencyImpact: 'Sustained GDP growth divergence drives multi-month multi-thousand pip trend channels.',
-    bias: 'BULLISH'
-  }
+    id: 'ecb',
+    name: 'ECB (European Central Bank)',
+    category: 'CENTRAL_BANK',
+    tag: 'EUROZONE POLICY',
+    whatItIs: 'The central institution governing the Euro and executing monetary policy for the 20 member states of the Eurozone.',
+    whyItMatters: 'Balances disparate fiscal profiles of northern and southern European sovereign debt yields and EUR balance sheets.',
+    currenciesAffected: 'EUR, EUR/USD, EUR/GBP, EUR/JPY',
+  },
+  {
+    id: 'boe',
+    name: 'BOE (Bank of England)',
+    category: 'CENTRAL_BANK',
+    tag: 'STERLING GOVERNANCE',
+    whatItIs: 'The central bank of the United Kingdom, responsible for setting Bank Rate and maintaining monetary and financial stability.',
+    whyItMatters: 'Manages British Pound volatility against persistent UK services inflation and international merchant capital flows.',
+    currenciesAffected: 'GBP, GBP/USD, GBP/JPY, EUR/GBP',
+  },
+  {
+    id: 'boj',
+    name: 'BOJ (Bank of Japan)',
+    category: 'CENTRAL_BANK',
+    tag: 'YEN STABILIZATION',
+    whatItIs: 'The central bank of Japan, managing sovereign quantitative easing, negative interest rates, and yield curve controls.',
+    whyItMatters: 'The Japanese Yen acts as the primary global carry-trade funding currency and ultimate safe haven during market crises.',
+    currenciesAffected: 'JPY, USD/JPY, GBP/JPY, EUR/JPY',
+  },
 ];

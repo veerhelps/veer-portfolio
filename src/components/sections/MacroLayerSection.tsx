@@ -1,11 +1,17 @@
-import React from 'react';
-import { macroLayerItems } from '../../data/macroData';
+import React, { useState } from 'react';
+import { macroLayerTopics, DetailedMacroTopic } from '../../data/macroData';
 import { economicCalendarEvents } from '../../data/economicCalendar';
-import { Radio, ArrowUpRight, AlertTriangle } from 'lucide-react';
+import { Radio, ChevronDown, ChevronUp, Landmark, Activity, AlertCircle, ArrowUpRight } from 'lucide-react';
 
 export function MacroLayerSection() {
+  const [expandedTopicId, setExpandedTopicId] = useState<string>(macroLayerTopics[0].id);
+
+  const toggleTopic = (id: string) => {
+    setExpandedTopicId((prev) => (prev === id ? '' : id));
+  };
+
   return (
-    <section id="macro" className="py-28 sm:py-36 bg-transparent border-t border-white/[0.08] relative">
+    <section id="macro" className="py-28 sm:py-36 bg-transparent border-t border-white/[0.08] relative select-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Macro Layer Header */}
         <div className="max-w-3xl mb-12">
@@ -19,39 +25,83 @@ export function MacroLayerSection() {
           </h2>
 
           <p className="text-stone-400 font-sans text-sm sm:text-base font-light mt-3 leading-relaxed">
-            Technical analysis locates timing; macroeconomic divergence dictates directional trend longevity. Institutional capital aligns with central bank sovereign interest rate differentials.
+            Technical market structure locates timing; macroeconomic divergence dictates directional trend longevity. Institutional capital aligns with sovereign interest rate spreads.
           </p>
         </div>
 
-        {/* 8 Macro Topics Editorial Cards (Headline, One-Sentence, Currency Impact) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-20">
-          {macroLayerItems.map((item) => (
-            <div
-              key={item.id}
-              className="p-5 sm:p-6 rounded-2xl bg-obsidian-900/60 border border-obsidian-800/80 hover:border-gold/30 transition-all flex flex-col justify-between"
-            >
-              <div>
-                <span className="font-mono text-[9px] text-gold tracking-widest uppercase block mb-2">
-                  {item.tag}
-                </span>
+        {/* 10 Expandable Macro Topics Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-20">
+          {macroLayerTopics.map((topic) => {
+            const isExpanded = expandedTopicId === topic.id;
+            return (
+              <div
+                key={topic.id}
+                className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+                  isExpanded
+                    ? 'bg-obsidian-900/95 border-gold/50 shadow-2xl gold-glow-sm'
+                    : 'bg-obsidian-900/50 border-obsidian-800 hover:border-obsidian-750'
+                }`}
+              >
+                {/* Topic Header Toggle */}
+                <button
+                  onClick={() => toggleTopic(topic.id)}
+                  className="w-full p-5 text-left flex items-center justify-between gap-4"
+                  aria-expanded={isExpanded}
+                  data-cursor="OPEN"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="p-2 rounded-xl bg-obsidian-950 border border-obsidian-800 text-gold">
+                      {topic.category === 'CENTRAL_BANK' ? <Landmark size={16} /> : <Activity size={16} />}
+                    </span>
+                    <div>
+                      <span className="font-mono text-[9px] text-stone-500 uppercase tracking-widest block">
+                        {topic.tag}
+                      </span>
+                      <h3 className="font-display font-bold text-lg sm:text-xl text-cream">
+                        {topic.name}
+                      </h3>
+                    </div>
+                  </div>
 
-                <h3 className="font-display font-bold text-xl text-cream mb-2 leading-snug">
-                  {item.headline}
-                </h3>
+                  <div className="text-stone-400 p-1">
+                    {isExpanded ? <ChevronUp size={18} className="text-gold" /> : <ChevronDown size={18} />}
+                  </div>
+                </button>
 
-                <p className="text-xs text-stone-300 font-sans font-light leading-relaxed mb-4">
-                  {item.oneSentence}
-                </p>
+                {/* Expandable Breakdown: WHAT IT IS, WHY IT MATTERS, CURRENCIES AFFECTED */}
+                {isExpanded && (
+                  <div className="px-5 pb-6 pt-1 border-t border-obsidian-850 font-mono text-xs space-y-3.5 animate-fadeIn">
+                    <div>
+                      <span className="text-gold font-bold uppercase tracking-wider block text-[10px] mb-1">
+                        WHAT IT IS:
+                      </span>
+                      <p className="text-stone-300 font-sans text-xs sm:text-sm font-light leading-relaxed">
+                        {topic.whatItIs}
+                      </p>
+                    </div>
+
+                    <div>
+                      <span className="text-emerald-market font-bold uppercase tracking-wider block text-[10px] mb-1">
+                        WHY IT MATTERS:
+                      </span>
+                      <p className="text-stone-300 font-sans text-xs sm:text-sm font-light leading-relaxed">
+                        {topic.whyItMatters}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-obsidian-850">
+                      <span className="text-stone-500 uppercase tracking-wider block text-[9px] mb-0.5">
+                        CURRENCIES AFFECTED:
+                      </span>
+                      <span className="text-cream font-bold text-xs">
+                        {topic.currenciesAffected}
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
-
-              <div className="pt-3 border-t border-obsidian-850">
-                <span className="text-[9px] font-mono text-stone-500 uppercase block mb-1">CURRENCY IMPACT:</span>
-                <p className="text-[11px] font-sans text-stone-400 leading-normal">
-                  {item.currencyImpact}
-                </p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Economic Calendar: EVENT RADAR */}
@@ -68,11 +118,11 @@ export function MacroLayerSection() {
             </div>
 
             <div className="font-mono text-[10px] text-stone-500 uppercase">
-              STATUS: <span className="text-emerald-market font-bold">MONITORED</span> • <span className="text-gold">DEMO DATA</span>
+              STATUS: <span className="text-emerald-market font-bold">ACTIVE REGIME</span> • <span className="text-gold">SIMULATED DATA</span>
             </div>
           </div>
 
-          <div className="overflow-x-auto rounded-2xl border border-obsidian-800 bg-obsidian-900/60 backdrop-blur-md shadow-2xl font-mono text-xs">
+          <div className="overflow-x-auto rounded-3xl border border-obsidian-800 bg-obsidian-900/60 backdrop-blur-md shadow-2xl font-mono text-xs">
             <table className="w-full min-w-[640px] text-left border-collapse">
               <thead>
                 <tr className="border-b border-obsidian-800 text-stone-400 bg-obsidian-950/90">

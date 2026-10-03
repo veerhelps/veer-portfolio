@@ -8,7 +8,7 @@ export const mentorshipPlans: MentorshipPlan[] = [
     billingPeriod: 'ONE-TIME ACCESS',
     subtitle: 'For emerging Forex traders seeking structural clarity and reality-based market fundamentals.',
     features: [
-      'Full Vaxsa Forex Curriculum Access (Modules 01 to 04)',
+      'Full VEER Forex Curriculum Access (Modules 01 to 04)',
       'Institutional Market Structure & Liquidity Video Library',
       'Daily Pre-Market Forex Analysis Notes & Pair Focus',
       'Community Discord Access (Member Level)',
@@ -20,12 +20,12 @@ export const mentorshipPlans: MentorshipPlan[] = [
     title: 'INSTITUTIONAL OPERATOR',
     price: '$1,299',
     billingPeriod: 'FULL MENTORSHIP PROGRAM',
-    subtitle: 'The flagship Vaxsa Forex Mentorship designed to transform dedicated traders into disciplined operators.',
+    subtitle: 'The flagship VEER Forex Mentorship designed to transform dedicated traders into disciplined operators.',
     isPopular: true,
     features: [
       'Everything in Foundation Framework',
       'Direct Weekly Live Trading & Analysis Sessions with Dharam Veer Singh Kirar',
-      'Proprietary Vaxsa Execution Models & Entry Playbooks',
+      'Proprietary VEER Execution Models & Entry Playbooks',
       'Personal Trade Journal Audit & Monthly Performance Review',
       'Private High-Confluence Forex Signals & Session Overlap Alerts',
       '1-on-1 Risk Management & Drawdown Consultation'
@@ -51,7 +51,7 @@ export const onboardingSteps = [
   {
     stepNumber: '01',
     title: 'SUBMIT REGISTRATION',
-    description: 'Select your preferred Vaxsa Forex Mentorship tier and submit your trader profile application.'
+    description: 'Select your preferred VEER Forex Mentorship tier and submit your trader profile application.'
   },
   {
     stepNumber: '02',
@@ -61,7 +61,7 @@ export const onboardingSteps = [
   {
     stepNumber: '03',
     title: 'RECEIVE TERMINAL ACCESS',
-    description: 'Gain immediate access to the Vaxsa Forex Curriculum, Live Radar alerts, and Community Discord.'
+    description: 'Gain immediate access to the VEER Forex Curriculum, Live Radar alerts, and Community Discord.'
   },
   {
     stepNumber: '04',

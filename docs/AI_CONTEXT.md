@@ -6,7 +6,7 @@
 
 ## 1. High-Level Project Summary
 
-- **Project Name**: VAXSA Forex Observatory (Dharam Veer Singh Kirar Portfolio).
+- **Project Name**: VEER Forex Observatory (Dharam Veer Singh Kirar Portfolio).
 - **Core Technology Stack**: React 19, TypeScript, Vite 5.4, Tailwind CSS 3.4, Three.js / React Three Fiber, GSAP 3.15 + ScrollTrigger, Lenis 1.3 smooth scroll.
 - **Nature of the Application**: An editorial, museum-grade institutional currency trading terminal and quantitative research portfolio.
 - **Port & Host**: Runs on `http://localhost:3000/` (configured in `vite.config.ts`).

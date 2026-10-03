@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { vaxsaCurriculumModules } from '../../data/forexStrategy';
+import { veerCurriculumModules } from '../../data/forexStrategy';
 import { ChevronDown, ChevronUp, BookOpen, Check } from 'lucide-react';
 
 export function PlaybookCurriculumSection() {
-  const [expandedId, setExpandedId] = useState<string>(vaxsaCurriculumModules[0].id);
+  const [expandedId, setExpandedId] = useState<string>(veerCurriculumModules[0].id);
 
   return (
     <section id="curriculum" className="py-28 sm:py-36 bg-transparent border-t border-white/[0.08] relative">
@@ -23,7 +23,7 @@ export function PlaybookCurriculumSection() {
 
         {/* Modules Accordion */}
         <div className="space-y-4">
-          {vaxsaCurriculumModules.map((mod) => {
+          {veerCurriculumModules.map((mod) => {
             const isExpanded = expandedId === mod.id;
             return (
               <div

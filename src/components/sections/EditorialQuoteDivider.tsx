@@ -70,7 +70,7 @@ export function EditorialQuoteDivider({ quote, subtitle, accent = 'gold', index 
       {/* Background Micro Watermark */}
       <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
         <span className="font-display font-black text-8xl sm:text-9xl tracking-tighter text-white whitespace-nowrap">
-          VAXSA OBSERVATORY
+          VEER OBSERVATORY
         </span>
       </div>
 

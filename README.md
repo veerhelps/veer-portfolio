@@ -1,4 +1,4 @@
-# 📈 VAXSA FOREX OBSERVATORY — DHARAM VEER SINGH KIRAR
+# 📈 VEER FOREX OBSERVATORY — DHARAM VEER SINGH KIRAR
 
 > **An interactive 3D institutional currency terminal, quantitative market research desk, and trading portfolio powered by React 19, Three.js, GSAP ScrollTrigger, Lenis, and Tailwind CSS.**
 
@@ -30,7 +30,7 @@ For deep technical dives, architectural diagrams, component APIs, and AI instruc
 
 ## 👁️ Project Overview & Purpose
 
-**VAXSA Forex Observatory** is a production-grade, dark-aesthetic 3D institutional trading terminal and financial research portfolio created by **Dharam Veer Singh Kirar**.
+**VEER Forex Observatory** is a production-grade, dark-aesthetic 3D institutional trading terminal and financial research portfolio created by **Dharam Veer Singh Kirar**.
 
 ### Purpose of the Website
 1. **Audited Transparency**: Provide verified quantitative proof of systematic market edge, disciplined risk boundaries, and an institutional track record ($124.8K Balance, +42.8% Total Return, 71.4% Win Rate, -4.8% Max Drawdown).
@@ -210,7 +210,7 @@ If connecting live financial feeds or third-party email providers in production:
 
 | Variable | Description | Default / Example |
 | :--- | :--- | :--- |
-| `VITE_SITE_URL` | Canonical production site URL | `https://vaxsa-forex.com` |
+| `VITE_SITE_URL` | Canonical production site URL | `https://veer-forex.com` |
 | `VITE_ANALYTICS_ID` | Optional analytics identifier | `va_xxxxxx` |
 | `VITE_FOREX_FEED_API_KEY` | Optional API key for live streaming pairs | *(Simulated in `forexPairs.ts`)* |
 

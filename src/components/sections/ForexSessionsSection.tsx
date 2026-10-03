@@ -50,7 +50,7 @@ export function ForexSessionsSection() {
                       <span className="text-stone-500 text-[9px]">STANDBY</span>
                     )}
                     <div className="specimen-pill-inset px-2 py-0.5 rounded-full text-[8px] text-stone-400">
-                      vaxsa.specimen
+                      veer.specimen
                     </div>
                   </div>
                 </div>

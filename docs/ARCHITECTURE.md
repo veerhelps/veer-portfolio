@@ -1,6 +1,6 @@
-# System Architecture — VAXSA Forex Observatory
+# System Architecture — VEER Forex Observatory
 
-This document outlines the technical architecture, subsystem interactions, component hierarchy, and data flow of the VAXSA Forex Observatory application.
+This document outlines the technical architecture, subsystem interactions, component hierarchy, and data flow of the VEER Forex Observatory application.
 
 ---
 
@@ -190,7 +190,7 @@ The project deliberately utilizes **lightweight, unidirectional React state** in
 
 The 3D visualization layer leverages **Three.js** through **React Three Fiber (R3F)** and **@react-three/drei**.
 
-### Design Principles for WebGL in VAXSA
+### Design Principles for WebGL in VEER
 1. **Low Draw-Call Footprint**:
    Particle fields (`ForexFlowField.tsx`) use a single `THREE.Points` object with `THREE.BufferAttribute` Float32 arrays for both position and vertex color, rendering hundreds of reactive particles in **1 single draw call**.
 2. **CPU-Light Vector Physics**:

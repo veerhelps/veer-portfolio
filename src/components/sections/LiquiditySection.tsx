@@ -35,7 +35,7 @@ export function LiquiditySection() {
               <div className="flex items-center justify-between mb-3 text-[10px] text-stone-400">
                 <span className="text-crimson font-bold uppercase tracking-wider">POOL 01 // BSL</span>
                 <div className="specimen-pill-inset px-2.5 py-0.5 rounded-full text-[9px] text-stone-400">
-                  vaxsa.specimen
+                  veer.specimen
                 </div>
               </div>
               <span className="text-crimson font-black text-lg block mb-2 font-display">BUY-SIDE LIQUIDITY</span>
@@ -54,7 +54,7 @@ export function LiquiditySection() {
               <div className="flex items-center justify-between mb-3 text-[10px] text-stone-400">
                 <span className="text-emerald-market font-bold uppercase tracking-wider">POOL 02 // SSL</span>
                 <div className="specimen-pill-inset px-2.5 py-0.5 rounded-full text-[9px] text-stone-400">
-                  vaxsa.specimen
+                  veer.specimen
                 </div>
               </div>
               <span className="text-emerald-market font-black text-lg block mb-2 font-display">SELL-SIDE LIQUIDITY</span>
@@ -73,7 +73,7 @@ export function LiquiditySection() {
               <div className="flex items-center justify-between mb-3 text-[10px] text-stone-400">
                 <span className="text-gold font-bold uppercase tracking-wider">IMBALANCE // FVG</span>
                 <div className="specimen-pill-inset px-2.5 py-0.5 rounded-full text-[9px] text-stone-400">
-                  vaxsa.specimen
+                  veer.specimen
                 </div>
               </div>
               <span className="text-gold font-black text-lg block mb-2 font-display">FAIR VALUE GAPS</span>

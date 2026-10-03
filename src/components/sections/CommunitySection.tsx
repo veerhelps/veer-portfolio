@@ -7,7 +7,7 @@ export function CommunitySection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
         <div className="inline-flex items-center gap-2 font-mono text-xs text-gold mb-3">
           <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-          <span className="tracking-widest uppercase font-semibold">SECTION 14 — VAXSA COMMUNITY</span>
+          <span className="tracking-widest uppercase font-semibold">SECTION 14 — VEER COMMUNITY</span>
         </div>
 
         <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-black text-cream tracking-tight mb-4 break-words">

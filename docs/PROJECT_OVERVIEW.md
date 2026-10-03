@@ -1,4 +1,4 @@
-# Project Overview — VAXSA Forex Observatory
+# Project Overview — VEER Forex Observatory
 
 > **Proprietary Market Microstructure Terminal, Quantitative Currency Research Desk & Institutional Portfolio Portfolio of Dharam Veer Singh Kirar.**
 
@@ -6,7 +6,7 @@
 
 ## 1. Executive Summary
 
-**VAXSA Forex Observatory** is a high-performance, dark-aesthetic web application that bridges institutional macroeconomic research, Smart Money Concepts (ICT/SMC), and algorithmic market visualizers with elite frontend design standards.
+**VEER Forex Observatory** is a high-performance, dark-aesthetic web application that bridges institutional macroeconomic research, Smart Money Concepts (ICT/SMC), and algorithmic market visualizers with elite frontend design standards.
 
 Built using **React 19**, **TypeScript**, **Three.js / React Three Fiber**, **GSAP ScrollTrigger**, and **Tailwind CSS**, the site delivers an editorial, museum-grade financial experience. Visitors can explore real-time simulated pair pricing, spatial 3D currency strength matrices, 24/5 world session radars with 3D world clocks, order flow liquidity maps, audited trading performance curves, and an institutional trade journal with complete trade post-mortems.
 
@@ -30,7 +30,7 @@ Built using **React 19**, **TypeScript**, **Three.js / React Three Fiber**, **GS
 - **Prop Firm Evaluators & Capital Allocators**: Seeking verified historical edge, disciplined drawdown control (-4.8% max), and systematic trade execution.
 - **Retail Forex & Futures Traders**: Seeking authentic Smart Money Concepts education, session timing nuance, and macroeconomic understanding.
 - **Engineering Peers & Web Designers**: Examining modern React 19 architecture, 3D WebGL implementations, and bespoke animation choreographies.
-- **Prospective Mentees & Advisory Clients**: Looking to join the VAXSA Trading Reality inner circle, one-on-one mentorship, or sovereign trading desk.
+- **Prospective Mentees & Advisory Clients**: Looking to join the VEER Trading Reality inner circle, one-on-one mentorship, or sovereign trading desk.
 
 ---
 
@@ -96,7 +96,7 @@ Built using **React 19**, **TypeScript**, **Three.js / React Three Fiber**, **GS
 
 | Attribute | Specification |
 | :--- | :--- |
-| **Project Name** | VAXSA Forex Observatory |
+| **Project Name** | VEER Forex Observatory |
 | **Lead Operator** | Dharam Veer Singh Kirar |
 | **Repository Type** | Single-Page Application (SPA) / Observatory Landing Page |
 | **Current Version** | `1.2.0` |

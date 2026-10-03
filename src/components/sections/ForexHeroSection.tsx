@@ -152,11 +152,15 @@ export function ForexHeroSection() {
       {/* Main Asymmetrical Editorial Hero Typography */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div ref={headlineRef} className="max-w-3xl text-left">
-          {/* Small Top Label: VAXSA FOREX OBSERVATORY */}
-          <div className="flex items-center gap-2 mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
+          {/* Top Label: VEER FOREX OBSERVATORY ● SYSTEM ONLINE */}
+          <div className="flex items-center gap-2.5 mb-3 flex-wrap">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-market animate-pulse" />
             <span className="font-mono text-xs text-gold tracking-widest uppercase font-semibold">
-              VAXSA / FOREX OBSERVATORY
+              VEER FOREX OBSERVATORY
+            </span>
+            <span className="text-stone-600 font-mono text-xs">•</span>
+            <span className="font-mono text-[11px] text-stone-400 tracking-wider uppercase">
+              SYSTEM ONLINE
             </span>
           </div>
 
@@ -171,14 +175,14 @@ export function ForexHeroSection() {
             <span className="text-gold-gradient block mt-1.5">SINGH KIRAR</span>
           </h1>
 
-          {/* Subtitle: VAXSA • TRADING REALITY */}
+          {/* Subtitle: VEER • TRADING REALITY */}
           <div className="text-xs sm:text-sm font-mono text-gold tracking-widest uppercase mt-4 mb-4 font-semibold">
-            VAXSA • TRADING REALITY
+            VEER • TRADING REALITY
           </div>
 
           {/* Supporting Text (max width 500px, crisp line-height) */}
           <p className="max-w-[500px] text-stone-300 text-xs sm:text-base font-sans font-light leading-relaxed mb-8">
-            Stop learning useless topics. Vaxsa focuses on what is needed to understand the Forex market with deep clarity, disciplined execution and reality-based concepts.
+            Stop learning useless topics. VEER focuses on what is needed to understand the Forex market with deep clarity, disciplined execution and reality-based concepts.
           </p>
 
           {/* Compact High-Contrast CTAs */}

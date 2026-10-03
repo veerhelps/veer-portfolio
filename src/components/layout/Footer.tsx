@@ -14,11 +14,15 @@ export function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-8 h-8 rounded-lg bg-obsidian-900 border border-gold/40 flex items-center justify-center">
-                <span className="font-display font-black text-gold text-xs">VX</span>
+                <span className="font-display font-black text-gold text-xs">VR</span>
               </div>
-              <span className="font-display font-bold text-cream tracking-wider text-sm">VAXSA OBSERVATORY</span>
+              <div>
+                <span className="font-display font-bold text-cream tracking-wider text-sm block">VEER</span>
+                <span className="font-mono text-[9px] text-stone-500 tracking-widest uppercase block">FOREX OBSERVATORY</span>
+              </div>
             </div>
-            <div className="font-mono text-gold text-xs font-semibold mb-3">DHARAM VEER SINGH KIRAR</div>
+            <div className="font-mono text-gold text-xs font-semibold mb-1">DHARAM VEER SINGH KIRAR</div>
+            <div className="font-mono text-[10px] text-stone-400 tracking-widest uppercase mb-3 font-semibold">TRADING REALITY</div>
             <p className="text-stone-500 leading-relaxed text-xs">
               An institutional Forex trading observatory, currency research desk, and reality-based execution framework.
             </p>
@@ -31,7 +35,7 @@ export function Footer() {
               <li><a href="#hero" className="hover:text-cream transition">THE POSTER HERO</a></li>
               <li><a href="#about" className="hover:text-cream transition">OPERATOR PROFILE</a></li>
               <li><a href="#watching" className="hover:text-cream transition">THE OBSERVATORY EYE</a></li>
-              <li><a href="#forex-market" className="hover:text-cream transition">FOREX UNIVERSE</a></li>
+              <li><a href="#universe" className="hover:text-cream transition">FOREX UNIVERSE</a></li>
               <li><a href="#strength" className="hover:text-cream transition">CURRENCY STRENGTH</a></li>
               <li><a href="#sessions" className="hover:text-cream transition">GLOBAL SESSIONS</a></li>
             </ul>
@@ -62,7 +66,7 @@ export function Footer() {
             <div className="mt-6 md:mt-0 text-[10px] text-stone-600 text-left md:text-right">
               LATENCY: 8MS // GATEWAY: LDN-01<br />
               ENGINE: THREE.JS + GSAP 3.15<br />
-              VAXSA OS: v5.2-FOREX
+              VEER OS: v5.2-FOREX
             </div>
           </div>
         </div>
@@ -75,14 +79,14 @@ export function Footer() {
               <span className="font-mono text-stone-400 font-semibold uppercase tracking-wider block mb-1">
                 REGULATORY & MARKET RISK DISCLOSURE
               </span>
-              All content published by VAXSA FOREX OBSERVATORY is strictly for educational and analytical purposes. Foreign exchange and CFD trading carries substantial financial risk and can result in losses exceeding initial capital deposits. Verify independent financial advice before committing speculative risk capital.
+              All content published by VEER FOREX OBSERVATORY is strictly for educational and analytical purposes. Foreign exchange and CFD trading carries substantial financial risk and can result in losses exceeding initial capital deposits. Verify independent financial advice before committing speculative risk capital.
             </div>
           </div>
         </div>
 
         {/* Copyright */}
         <div className="mt-8 pt-6 border-t border-obsidian-900 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-[11px] text-stone-600">
-          <div>© {new Date().getFullYear()} VAXSA FOREX OBSERVATORY • DHARAM VEER SINGH KIRAR.</div>
+          <div>© {new Date().getFullYear()} VEER FOREX OBSERVATORY • DHARAM VEER SINGH KIRAR.</div>
           <div className="flex flex-wrap gap-4 sm:gap-6">
             <a href="#" className="hover:text-stone-400">PRIVACY PROTOCOL</a>
             <a href="#" className="hover:text-stone-400">TERMS OF EXECUTION</a>

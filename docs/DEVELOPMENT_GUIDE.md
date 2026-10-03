@@ -1,6 +1,6 @@
-# Developer & Contributor Guide — VAXSA Forex Observatory
+# Developer & Contributor Guide — VEER Forex Observatory
 
-This guide details local environment setup, recommended development workflows, architectural patterns, coding conventions, and testing procedures for engineers working on the VAXSA Forex Observatory.
+This guide details local environment setup, recommended development workflows, architectural patterns, coding conventions, and testing procedures for engineers working on the VEER Forex Observatory.
 
 ---
 

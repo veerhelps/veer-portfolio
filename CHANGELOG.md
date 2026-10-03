@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the **VAXSA Forex Observatory** project are documented in this file.
+All notable changes to the **VEER Forex Observatory** project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -57,7 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] — 2026-09-15
 
 ### Added
-- Initial public release of the VAXSA Forex Observatory.
+- Initial public release of the VEER Forex Observatory.
 - 16-section continuous editorial poster layout.
 - Real-time simulated pair catalog across Major, Cross, and Precious Metal pairs with mini candlestick sparklines.
 - Currency strength delta matrix measuring relative power of 8 global currencies.

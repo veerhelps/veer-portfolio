@@ -1,12 +1,12 @@
-# Styling & Design System Guide — VAXSA Forex Observatory
+# Styling & Design System Guide — VEER Forex Observatory
 
-This guide details the aesthetic design system, color palette, typography hierarchy, glassmorphism tokens, and animation standards used across the VAXSA Forex Observatory.
+This guide details the aesthetic design system, color palette, typography hierarchy, glassmorphism tokens, and animation standards used across the VEER Forex Observatory.
 
 ---
 
 ## 1. Design System Philosophy
 
-The design identity of VAXSA is defined by **Sovereign Institutional Luxury**:
+The design identity of VEER is defined by **Sovereign Institutional Luxury**:
 - Rejects cheap, generic SaaS templates and bright saturated AI purple meshes.
 - Embraces a deep obsidian black foundation, warm editorial cream typography, and metallic champagne gold and surgical crimson indicators.
 - Employs tactile frosted liquid glass surfaces (`card-specimen-glass`) with sub-surface lighting.
@@ -80,7 +80,7 @@ The application features a responsive CSS variable system driven by GSAP ScrollT
 
 ## 4. Frosted Liquid Glass System (`.card-specimen-glass`)
 
-Rather than flat semi-transparent boxes, VAXSA uses **Frosted Liquid Glass cards** with subtle specular insets:
+Rather than flat semi-transparent boxes, VEER uses **Frosted Liquid Glass cards** with subtle specular insets:
 
 ```css
 .card-specimen-glass {

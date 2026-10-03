@@ -9,7 +9,8 @@ export function GlobalForexMarket() {
   const filteredPairs = forexPairs.filter(p => filter === 'ALL' || p.category === filter);
 
   return (
-    <section id="forex-market" className="py-28 sm:py-36 bg-transparent border-t border-white/[0.08] relative">
+    <section id="universe" className="py-28 sm:py-36 bg-transparent border-t border-white/[0.08] relative">
+      <span id="forex-market" className="absolute -top-24" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
@@ -76,7 +77,7 @@ export function GlobalForexMarket() {
                       {pair.category}
                     </span>
                     <div className="specimen-pill-inset px-2.5 py-0.5 rounded-full text-[9px] text-stone-400 group-hover:text-gold transition">
-                      vaxsa.specimen
+                      veer.specimen
                     </div>
                   </div>
 

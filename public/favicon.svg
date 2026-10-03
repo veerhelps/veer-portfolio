@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#161616" />
+      <stop offset="100%" stop-color="#050505" />
+    </radialGradient>
+    <linearGradient id="goldLinear" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0CA" />
+      <stop offset="50%" stop-color="#D6B45A" />
+      <stop offset="100%" stop-color="#9E7D2B" />
+    </linearGradient>
+    <linearGradient id="crimsonLinear" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F87171" />
+      <stop offset="50%" stop-color="#D52B32" />
+      <stop offset="100%" stop-color="#8F1118" />
+    </linearGradient>
+  </defs>
+
+  <!-- Obsidian Rounded Surface -->
+  <rect x="4" y="4" width="120" height="120" rx="28" fill="url(#bgGlow)" stroke="#D6B45A" stroke-width="2" stroke-opacity="0.45" />
+
+  <!-- Subtle Specular Inset Rim -->
+  <rect x="10" y="10" width="108" height="108" rx="22" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.1" />
+
+  <!-- Crimson Sovereign Accent Dot -->
+  <circle cx="98" cy="30" r="4.5" fill="url(#crimsonLinear)" />
+
+  <!-- VR Monogram in Champagne Gold and Ivory -->
+  <!-- V Monogram Leg Left -->
+  <path d="M 28 38 L 44 38 L 56 86 L 68 38 L 84 38 L 64 96 L 48 96 Z" fill="url(#goldLinear)" />
+
+  <!-- R Monogram Spine & Loop Interlocking -->
+  <path d="M 72 44 L 88 44 C 98 44 104 50 104 60 C 104 68 98 74 88 74 L 78 74 L 78 96 L 70 96 L 70 44 Z M 78 52 L 78 66 L 87 66 C 92 66 96 64 96 60 C 96 56 92 52 87 52 Z" fill="#FAF7F2" />
+  <!-- R Monogram Diagonal Leg -->
+  <path d="M 85 71 L 102 96 L 91 96 L 76 73 Z" fill="url(#goldLinear)" />
+</svg>

@@ -17,7 +17,7 @@ export function FinalCTASection() {
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         <div className="font-mono text-xs text-gold tracking-widest uppercase mb-6 flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-          <span>VAXSA OBSERVATORY // SYSTEM LOG-OFF</span>
+          <span>VEER OBSERVATORY // SYSTEM LOG-OFF</span>
         </div>
 
         {/* Large Typography: READ THE MARKET. BUILD THE PROCESS. */}
@@ -29,7 +29,7 @@ export function FinalCTASection() {
         {/* Subtitle Identity */}
         <div className="space-y-1 mb-10 font-mono">
           <div className="text-sm sm:text-base font-bold text-cream tracking-widest uppercase">
-            VAXSA FOREX OBSERVATORY
+            VEER FOREX OBSERVATORY
           </div>
           <div className="text-xs sm:text-sm text-gold font-semibold tracking-widest uppercase">
             DHARAM VEER SINGH KIRAR

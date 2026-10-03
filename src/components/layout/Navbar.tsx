@@ -31,17 +31,17 @@ export function Navbar() {
 
   const centerLinks = [
     { label: 'ABOUT', href: '#about' },
-    { label: 'MARKET', href: '#forex-market' },
-    { label: 'LIQUIDITY', href: '#liquidity' },
+    { label: 'UNIVERSE', href: '#universe' },
+    { label: 'STRENGTH', href: '#strength' },
     { label: 'SESSIONS', href: '#sessions' },
+    { label: 'LIQUIDITY', href: '#liquidity' },
     { label: 'PORTFOLIO', href: '#portfolio' },
-    { label: 'JOURNAL', href: '#journal' },
   ];
 
   const moreLinks = [
-    { label: 'STRENGTH', href: '#strength' },
     { label: 'CURRICULUM', href: '#curriculum' },
     { label: 'MACRO', href: '#macro' },
+    { label: 'JOURNAL', href: '#journal' },
     { label: 'PRICING', href: '#pricing' },
     { label: 'COMMUNITY', href: '#community' },
     { label: 'CONTACT', href: '#contact' },
@@ -61,14 +61,14 @@ export function Navbar() {
             : 'bg-obsidian-900/60 border-obsidian-800/60 shadow-[0_4px_24px_rgba(0,0,0,0.5)] py-2.5 sm:py-3 px-3 sm:px-7 rounded-2xl'
         }`}
       >
-        {/* LEFT: VX / VAXSA / FOREX */}
+        {/* LEFT: VR / VEER / FOREX */}
         <a href="#hero" className="flex items-center gap-3 group shrink-0">
           <div className="w-8 h-8 rounded-lg bg-obsidian-950 border border-gold/40 flex items-center justify-center group-hover:border-gold transition-colors duration-300 gold-glow-sm">
-            <span className="font-display font-black text-gold text-xs tracking-tight">VX</span>
+            <span className="font-display font-black text-gold text-xs tracking-tight">VR</span>
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5 leading-none">
-              <span className="font-display font-extrabold text-xs tracking-wider text-cream">VAXSA</span>
+              <span className="font-display font-extrabold text-xs tracking-wider text-cream">VEER</span>
               <span className="text-[9px] font-mono text-gold px-1 py-0.5 rounded bg-gold/10 border border-gold/25 tracking-widest uppercase">
                 FOREX
               </span>
@@ -164,10 +164,10 @@ export function Navbar() {
           <div className="flex items-center justify-between border-b border-obsidian-850 pb-5">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-obsidian-900 border border-gold/40 flex items-center justify-center">
-                <span className="font-display font-black text-gold text-xs">VX</span>
+                <span className="font-display font-black text-gold text-xs">VR</span>
               </div>
               <div>
-                <span className="font-display font-bold text-cream text-sm tracking-wider">VAXSA FOREX</span>
+                <span className="font-display font-bold text-cream text-sm tracking-wider">VEER FOREX</span>
                 <span className="text-[9px] font-mono text-stone-500 block">OBSERVATORY</span>
               </div>
             </div>

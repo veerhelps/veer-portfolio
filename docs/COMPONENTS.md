@@ -1,6 +1,6 @@
-# Component Reference — VAXSA Forex Observatory
+# Component Reference — VEER Forex Observatory
 
-This document provides a comprehensive inventory and technical reference for all React components in the VAXSA Forex Observatory codebase.
+This document provides a comprehensive inventory and technical reference for all React components in the VEER Forex Observatory codebase.
 
 ---
 
@@ -151,7 +151,7 @@ All 3D components are built with `@react-three/fiber` and `@react-three/drei`.
 ### `<ForexHeroSection />`
 - **File**: [`src/components/sections/ForexHeroSection.tsx`](file:///c:/Users/rudra/OneDrive/Desktop/Veer%20Portfolio/src/components/sections/ForexHeroSection.tsx)
 - **ID**: `#hero`
-- **Content**: Asymmetric editorial poster layout introducing **VAXSA Trading Reality**, key performance counters ($124.8K Balance, +42.8% Total Return, 71.4% Win Rate), live floating ticker badges, and the 3D Financial Artifact.
+- **Content**: Asymmetric editorial poster layout introducing **VEER Trading Reality**, key performance counters ($124.8K Balance, +42.8% Total Return, 71.4% Win Rate), live floating ticker badges, and the 3D Financial Artifact.
 
 ### `<EditorialQuoteDivider />`
 - **File**: [`src/components/sections/EditorialQuoteDivider.tsx`](file:///c:/Users/rudra/OneDrive/Desktop/Veer%20Portfolio/src/components/sections/EditorialQuoteDivider.tsx)

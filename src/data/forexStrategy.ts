@@ -1,6 +1,6 @@
 import { CurriculumModule } from '../types';
 
-export const vaxsaCurriculumModules: CurriculumModule[] = [
+export const veerCurriculumModules: CurriculumModule[] = [
   {
     id: 'c-1',
     number: '01',
@@ -33,7 +33,7 @@ export const vaxsaCurriculumModules: CurriculumModule[] = [
     title: 'THE EXECUTION ENGINE & RISK DISCIPLINE',
     subtitle: 'Translating institutional analysis into repeatable entry models with strict mathematical capital preservation.',
     topics: [
-      'The 3 Vaxsa High-Confluence Entry Models',
+      'The 3 VEER High-Confluence Entry Models',
       'Mathematical Position Sizing Formula based on Pips & Volatility ATR',
       'Hard Stop Loss Placement 5 Pips Beyond Structural Swing Invalidation',
       'Asymmetric Risk-to-Reward Ratio Structuring (Minimum 1 : 2.5 R:R)',

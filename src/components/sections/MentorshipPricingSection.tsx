@@ -18,7 +18,7 @@ export function MentorshipPricingSection() {
           </h2>
 
           <p className="text-stone-300 text-sm sm:text-base font-sans font-light leading-relaxed">
-            Stop learning useless topics. Vaxsa provides exactly what is needed to become a consistently profitable Forex operator with deep clarity, institutional discipline, and reality-based execution.
+            Stop learning useless topics. VEER provides exactly what is needed to become a consistently profitable Forex operator with deep clarity, institutional discipline, and reality-based execution.
           </p>
         </div>
 
@@ -79,7 +79,7 @@ export function MentorshipPricingSection() {
         <div className="border-t border-obsidian-850 pt-16">
           <div className="max-w-xl mb-10">
             <h3 className="text-2xl sm:text-3xl font-bold font-display text-cream mb-2">ONBOARDING PROCESS</h3>
-            <p className="text-xs font-mono text-stone-400 uppercase tracking-wider">FOUR STEP EXECUTION TO JOIN THE VAXSA DESK</p>
+            <p className="text-xs font-mono text-stone-400 uppercase tracking-wider">FOUR STEP EXECUTION TO JOIN THE VEER DESK</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 font-mono text-xs">

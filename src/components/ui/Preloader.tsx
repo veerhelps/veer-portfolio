@@ -31,11 +31,11 @@ export function Preloader({ onComplete }: PreloaderProps) {
       <div className="flex flex-col items-center select-none">
         {/* Sleek Minimal Emblem */}
         <div className="w-12 h-12 rounded-xl bg-obsidian-900 border border-gold/50 flex items-center justify-center mb-6 shadow-[0_0_25px_rgba(214,180,90,0.15)]">
-          <span className="font-display font-black text-gold text-base tracking-tighter">VX</span>
+          <span className="font-display font-black text-gold text-base tracking-tighter">VR</span>
         </div>
 
         <div className="text-xs font-bold text-cream tracking-[0.25em] uppercase mb-1">
-          VAXSA FOREX OBSERVATORY
+          VEER FOREX OBSERVATORY
         </div>
         <div className="text-[10px] text-gold tracking-widest uppercase mb-6 font-semibold">
           DHARAM VEER SINGH KIRAR
@@ -48,7 +48,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
 
         <div className="mt-6 text-[9px] text-stone-500 tracking-widest flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-market animate-pulse" />
-          <span>INITIALIZING OBSERVATORY GATEWAY</span>
+          <span>INITIALIZING FOREX OBSERVATORY // VEER SYSTEM READY</span>
         </div>
       </div>
     </div>

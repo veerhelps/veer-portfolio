@@ -19,7 +19,7 @@ export function TraderProfile() {
           <div className="font-mono text-xs sm:text-sm text-stone-400 mt-2 tracking-widest uppercase flex flex-wrap items-center gap-2">
             <span>FOUNDER & CHIEF OPERATOR</span>
             <span className="text-gold">•</span>
-            <span className="text-gold">VAXSA FOREX OBSERVATORY</span>
+            <span className="text-gold">VEER FOREX OBSERVATORY</span>
           </div>
         </div>
 
@@ -28,7 +28,7 @@ export function TraderProfile() {
           {/* Main Statement */}
           <div className="lg:col-span-7 space-y-6">
             <p className="text-xl sm:text-2xl font-light text-cream leading-relaxed border-l-2 border-gold pl-6 font-sans">
-              "Master the reality of trading. The global currency market is an institutionally driven liquidity engine. My mission with Vaxsa is to strip away retail noise and deliver pure market reality."
+              "Master the reality of trading. The global currency market is an institutionally driven liquidity engine. My mission with VEER is to strip away retail noise and deliver pure market reality."
             </p>
 
             <p className="text-stone-300 font-sans text-sm sm:text-base font-light leading-relaxed">
@@ -58,7 +58,7 @@ export function TraderProfile() {
               <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6 font-mono text-xs">
                 <div className="flex items-center gap-2 text-stone-300">
                   <Terminal size={15} className="text-opal-silver shrink-0" />
-                  <span className="font-bold truncate">OPERATOR PROFILE // VX-001</span>
+                  <span className="font-bold truncate">OPERATOR PROFILE // VR-001</span>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
                   <span className="text-emerald-market font-bold flex items-center gap-1.5 text-[10px]">
@@ -66,7 +66,7 @@ export function TraderProfile() {
                     ONLINE
                   </span>
                   <div className="specimen-pill-inset px-2.5 py-0.5 rounded-full text-[9px] text-stone-400">
-                    vaxsa.specimen
+                    veer.specimen
                   </div>
                 </div>
               </div>
@@ -78,7 +78,7 @@ export function TraderProfile() {
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/5 pb-2.5 gap-1">
                   <span className="text-stone-500">BRAND:</span>
-                  <span className="text-gold font-bold">VAXSA</span>
+                  <span className="text-gold font-bold">VEER</span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/5 pb-2.5 gap-1">
                   <span className="text-stone-500">DOMAIN:</span>

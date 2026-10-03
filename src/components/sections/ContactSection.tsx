@@ -20,7 +20,7 @@ export function ContactSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
           <a
-            href="mailto:dharam@vaxsa.io"
+            href="mailto:dharam@veer.io"
             className="p-6 sm:p-8 rounded-2xl bg-obsidian-900/60 border border-obsidian-800 hover:border-gold/50 transition-all duration-300 group flex items-start justify-between"
           >
             <div>
@@ -28,13 +28,13 @@ export function ContactSection() {
                 <Mail size={18} />
               </div>
               <div className="text-[10px] text-stone-500 uppercase tracking-wider mb-1">DIRECT OPERATOR EMAIL</div>
-              <div className="font-display font-bold text-cream group-hover:text-gold transition text-base">dharam@vaxsa.io</div>
+              <div className="font-display font-bold text-cream group-hover:text-gold transition text-base">dharam@veer.io</div>
             </div>
             <ArrowUpRight size={16} className="text-stone-500 group-hover:text-gold transition" />
           </a>
 
           <a
-            href="https://vaxsa.io"
+            href="https://veer.io"
             target="_blank"
             rel="noreferrer"
             className="p-6 sm:p-8 rounded-2xl bg-obsidian-900/60 border border-obsidian-800 hover:border-gold/50 transition-all duration-300 group flex items-start justify-between"
@@ -44,7 +44,7 @@ export function ContactSection() {
                 <Globe size={18} />
               </div>
               <div className="text-[10px] text-stone-500 uppercase tracking-wider mb-1">OFFICIAL RESEARCH PORTAL</div>
-              <div className="font-display font-bold text-cream group-hover:text-gold transition text-base">vaxsa.io</div>
+              <div className="font-display font-bold text-cream group-hover:text-gold transition text-base">veer.io</div>
             </div>
             <ArrowUpRight size={16} className="text-stone-500 group-hover:text-gold transition" />
           </a>
@@ -60,7 +60,7 @@ export function ContactSection() {
                 <Send size={18} />
               </div>
               <div className="text-[10px] text-stone-500 uppercase tracking-wider mb-1">TELEGRAM TRADING DESK</div>
-              <div className="font-display font-bold text-cream group-hover:text-gold transition text-base">@VaxsaForexDesk</div>
+              <div className="font-display font-bold text-cream group-hover:text-gold transition text-base">@VeerForexDesk</div>
             </div>
             <ArrowUpRight size={16} className="text-stone-500 group-hover:text-gold transition" />
           </a>

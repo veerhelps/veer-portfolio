@@ -137,7 +137,7 @@ export function App() {
           {/* SECTION 11: TRADING PSYCHOLOGY — HIGH TYPOGRAPHY & NEGATIVE SPACE */}
           <PsychologySection />
 
-          {/* SECTION 12: VAXSA CURRICULUM */}
+          {/* SECTION 12: VEER CURRICULUM */}
           <PlaybookCurriculumSection />
 
           {/* SECTION 13: MENTORSHIP PRICING & ONBOARDING */}

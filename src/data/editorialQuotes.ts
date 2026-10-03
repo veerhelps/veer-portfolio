@@ -4,7 +4,7 @@ export const editorialQuotes: Record<string, EditorialQuote> = {
   hero: {
     quote: '"WHILE OTHERS SELL ILLUSIONS,"',
     author: 'DHARAM VEER SINGH KIRAR',
-    subtitle: 'VAXSA • TRADING REALITY',
+    subtitle: 'VEER • TRADING REALITY',
     accent: 'gold',
   },
   afterHero: {
@@ -40,7 +40,7 @@ export const editorialQuotes: Record<string, EditorialQuote> = {
   final: {
     quote: 'READ THE MARKET. BUILD THE PROCESS.',
     author: 'DHARAM VEER SINGH KIRAR',
-    subtitle: 'VAXSA FOREX OBSERVATORY',
+    subtitle: 'VEER FOREX OBSERVATORY',
     accent: 'gold',
   },
 };

@@ -1,205 +1,138 @@
-import React, { useState, useRef } from 'react';
-import { veerCurriculumModules } from '../../data/forexStrategy';
-import { ChevronDown, ChevronUp, Check, BookOpen, Layers, ArrowRight } from 'lucide-react';
-import { useGSAP } from '@gsap/react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useState } from 'react';
+import { beginnerGuideModules, BeginnerGuideModule } from '../../data/forexStrategy';
+import { BookOpen, CheckCircle2, ChevronRight, Compass, Shield } from 'lucide-react';
 
 export function PlaybookCurriculumSection() {
-  const [activeModuleId, setActiveModuleId] = useState<string>(veerCurriculumModules[0].id);
-  const containerRef = useRef<HTMLElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
+  const [activeModuleId, setActiveModuleId] = useState<string>(beginnerGuideModules[0].id);
 
-  const activeModule = veerCurriculumModules.find((m) => m.id === activeModuleId) || veerCurriculumModules[0];
-
-  useGSAP(
-    () => {
-      if (!containerRef.current) return;
-
-      // Scroll-driven module activation
-      const moduleEls = document.querySelectorAll('.curriculum-scroll-node');
-      moduleEls.forEach((node, idx) => {
-        ScrollTrigger.create({
-          trigger: node,
-          start: 'top 65%',
-          end: 'bottom 65%',
-          onEnter: () => setActiveModuleId(veerCurriculumModules[idx].id),
-          onEnterBack: () => setActiveModuleId(veerCurriculumModules[idx].id),
-        });
-      });
-    },
-    { scope: containerRef }
-  );
+  const activeModule =
+    beginnerGuideModules.find((m) => m.id === activeModuleId) || beginnerGuideModules[0];
 
   return (
     <section
-      ref={containerRef}
-      id="curriculum"
-      className="py-28 sm:py-36 bg-transparent border-t border-white/[0.08] relative select-none"
+      id="guide"
+      className="py-24 sm:py-32 bg-transparent border-t border-white/[0.08] relative select-none"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span id="curriculum" className="absolute -top-24" />
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12">
         {/* Section Header */}
-        <div className="flex items-center gap-2 font-mono text-xs text-gold mb-3">
-          <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-          <span className="tracking-widest uppercase font-semibold">SECTION 12 — CURRICULUM ARCHITECTURE</span>
+        <div className="mb-12">
+          <div className="flex items-center gap-2 font-mono text-xs text-gold mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
+            <span className="tracking-widest uppercase font-semibold">07 — BEGINNER GUIDE</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-black text-cream tracking-tight mb-4">
+            BEGINNER <span className="text-gold-gradient">GUIDE.</span>
+          </h2>
+
+          <p className="max-w-2xl text-stone-300 text-xs sm:text-sm md:text-base font-light leading-relaxed font-sans">
+            A beginner-friendly educational starting point. Structured around foundational market mechanics, structural order, and psychological discipline—stripping away retail illusions.
+          </p>
         </div>
 
-        <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-black text-cream tracking-tight mb-4 break-words">
-          MASTER THE REALITY <span className="text-gold-gradient">OF TRADING</span>
-        </h2>
-
-        <p className="max-w-2xl text-stone-300 text-sm sm:text-base font-light mb-12 border-l-2 border-gold pl-4 font-sans leading-relaxed">
-          "The curriculum is designed to strip away the noise. Learn institutional Forex market structure, liquidity architecture, and repeatable risk frameworks without retail illusions."
-        </p>
-
-        {/* DESKTOP/TABLET: Two-column chapter path + dynamic active preview */}
-        <div className="hidden lg:grid grid-cols-12 gap-8 items-start">
-          {/* Left Column: Interactive Chapter Timeline (5 cols) */}
-          <div className="col-span-5 space-y-3 relative">
-            {/* Visual Chapter Rail */}
-            <div className="absolute left-6 top-6 bottom-6 w-[2px] bg-obsidian-800 -z-10" />
-
-            {veerCurriculumModules.map((mod) => {
-              const isActive = mod.id === activeModuleId;
+        {/* Desktop/Tablet: Left selector + Right expanded content */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Left Column: 9 Module Selector List */}
+          <div className="lg:col-span-5 flex flex-col space-y-2.5 font-mono text-xs">
+            {beginnerGuideModules.map((mod) => {
+              const isSelected = activeModuleId === mod.id;
               return (
-                <div
+                <button
                   key={mod.id}
                   onClick={() => setActiveModuleId(mod.id)}
-                  className={`curriculum-scroll-node p-4 rounded-2xl border transition-all duration-200 cursor-pointer flex items-center gap-4 ${
-                    isActive
-                      ? 'bg-obsidian-900 border-gold shadow-lg pl-5'
-                      : 'bg-obsidian-950/60 border-obsidian-850 hover:border-obsidian-750'
+                  className={`p-4 sm:p-4.5 rounded-2xl text-left border transition-all duration-200 cursor-pointer flex items-center justify-between ${
+                    isSelected
+                      ? 'bg-cream text-obsidian-950 border-cream shadow-xl'
+                      : 'bg-obsidian-900/60 text-stone-300 border-white/[0.08] hover:border-gold/40'
                   }`}
                   data-cursor="OPEN"
                 >
-                  <div
-                    className={`w-9 h-9 rounded-xl flex items-center justify-center font-mono text-sm font-bold shrink-0 transition-colors ${
-                      isActive
-                        ? 'bg-gold text-obsidian-950 shadow-[0_0_12px_#D6B45A]'
-                        : 'bg-obsidian-900 border border-obsidian-800 text-stone-500'
+                  <div className="flex items-center gap-3">
+                    <span
+                      className={`text-[11px] font-bold shrink-0 ${
+                        isSelected ? 'text-obsidian-600' : 'text-gold'
+                      }`}
+                    >
+                      {mod.number}
+                    </span>
+                    <div>
+                      <span className="font-bold tracking-wider block font-display text-sm">
+                        {mod.title}
+                      </span>
+                      <span
+                        className={`text-[10px] font-sans truncate block max-w-[220px] sm:max-w-xs ${
+                          isSelected ? 'text-obsidian-750' : 'text-stone-400'
+                        }`}
+                      >
+                        {mod.subtitle}
+                      </span>
+                    </div>
+                  </div>
+                  <ChevronRight
+                    size={16}
+                    className={`shrink-0 transition-transform ${
+                      isSelected
+                        ? 'text-obsidian-950 translate-x-0.5'
+                        : 'text-stone-500'
                     }`}
-                  >
-                    {mod.number}
-                  </div>
-
-                  <div className="min-w-0">
-                    <h3 className={`font-display font-bold text-sm sm:text-base truncate ${
-                      isActive ? 'text-cream' : 'text-stone-400'
-                    }`}>
-                      {mod.title}
-                    </h3>
-                    <p className="text-[11px] text-stone-500 truncate font-sans">
-                      {mod.subtitle}
-                    </p>
-                  </div>
-                </div>
+                  />
+                </button>
               );
             })}
           </div>
 
-          {/* Right Column: Sticky Active Chapter Display (7 cols) */}
-          <div className="col-span-7 sticky top-28 p-8 rounded-3xl bg-obsidian-900/90 border border-gold/40 shadow-2xl gold-glow-md backdrop-blur-2xl animate-fadeIn space-y-6">
-            <div className="flex items-center justify-between border-b border-obsidian-800 pb-4">
-              <div className="flex items-center gap-3">
-                <span className="px-2.5 py-1 rounded-md bg-gold/15 border border-gold/30 font-mono text-xs text-gold font-bold">
-                  CHAPTER {activeModule.number}
+          {/* Right Column: Active Module Educational Deep Dive */}
+          <div className="lg:col-span-7">
+            <div className="p-7 sm:p-9 rounded-3xl bg-gradient-to-b from-obsidian-900/90 to-obsidian-950 border border-white/[0.1] shadow-2xl relative">
+              {/* Module Header Badge */}
+              <div className="flex items-center justify-between border-b border-white/[0.08] pb-4 mb-6 font-mono text-xs">
+                <div className="flex items-center gap-2 text-gold">
+                  <BookOpen size={16} />
+                  <span className="font-bold tracking-widest uppercase">
+                    MODULE {activeModule.number} // CURRICULUM OVERVIEW
+                  </span>
+                </div>
+                <span className="text-[10px] text-stone-500 tracking-widest uppercase font-semibold">
+                  EDUCATIONAL
                 </span>
-                <span className="font-mono text-xs text-stone-400">VEER OPERATOR CURRICULUM</span>
               </div>
-              <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-            </div>
 
-            <div>
-              <h3 className="font-display font-black text-2xl sm:text-3xl text-cream mb-2">
+              {/* Module Title & Subtitle */}
+              <h3 className="font-display font-black text-2xl sm:text-3xl text-cream mb-2 tracking-tight">
                 {activeModule.title}
               </h3>
-              <p className="text-stone-300 font-sans text-sm font-light leading-relaxed">
+              <p className="font-mono text-xs text-gold/90 mb-5 uppercase tracking-wider">
                 {activeModule.subtitle}
               </p>
-            </div>
 
-            {/* Topics Checklist */}
-            <div className="space-y-3 pt-2">
-              <span className="font-mono text-[10px] text-gold uppercase tracking-widest block font-bold">
-                OPERATIONAL SPECIFICATIONS COVERED:
-              </span>
-              <div className="grid grid-cols-1 gap-2.5">
-                {activeModule.topics.map((topic, i) => (
-                  <div
-                    key={i}
-                    className="p-3.5 rounded-xl bg-obsidian-950 border border-white/5 flex items-start gap-3"
-                  >
-                    <Check size={16} className="text-gold shrink-0 mt-0.5" />
-                    <span className="text-stone-200 text-xs sm:text-sm font-sans">{topic}</span>
-                  </div>
-                ))}
+              {/* Summary */}
+              <p className="text-stone-300 font-sans text-xs sm:text-sm font-light leading-relaxed mb-8">
+                {activeModule.summary}
+              </p>
+
+              {/* Core Learning Concepts List */}
+              <div className="pt-6 border-t border-white/[0.08]">
+                <h4 className="font-mono text-[11px] text-stone-400 uppercase tracking-widest mb-4">
+                  CORE LEARNING PILLARS
+                </h4>
+                <div className="space-y-3 font-sans text-xs sm:text-sm">
+                  {activeModule.concepts.map((concept, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3.5 rounded-xl bg-obsidian-950/80 border border-white/[0.06] flex items-start gap-3 text-stone-300"
+                    >
+                      <CheckCircle2
+                        size={16}
+                        className="text-gold shrink-0 mt-0.5"
+                      />
+                      <span className="leading-relaxed font-light">{concept}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-
-            <div className="pt-4 border-t border-obsidian-850 flex items-center justify-between font-mono text-xs text-stone-500">
-              <span>CONTINUOUS EVALUATION MODEL</span>
-              <a
-                href="#contact"
-                className="text-gold hover:text-cream flex items-center gap-1.5 font-bold transition"
-              >
-                <span>ENROLL IN MODULE</span>
-                <ArrowRight size={13} />
-              </a>
             </div>
           </div>
-        </div>
-
-        {/* MOBILE FALLBACK: Stacked Accordion */}
-        <div className="lg:hidden space-y-3">
-          {veerCurriculumModules.map((mod) => {
-            const isExpanded = activeModuleId === mod.id;
-            return (
-              <div
-                key={mod.id}
-                className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
-                  isExpanded
-                    ? 'bg-obsidian-900 border-gold/40 shadow-xl'
-                    : 'bg-obsidian-900/40 border-obsidian-850'
-                }`}
-              >
-                <button
-                  onClick={() => setActiveModuleId(isExpanded ? '' : mod.id)}
-                  className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-3"
-                  aria-expanded={isExpanded}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-lg font-black text-gold/60 shrink-0">
-                      {mod.number}
-                    </span>
-                    <div>
-                      <h3 className="text-base font-bold font-display text-cream">{mod.title}</h3>
-                      <p className="text-xs text-stone-400 font-sans mt-0.5 truncate">{mod.subtitle}</p>
-                    </div>
-                  </div>
-
-                  <div className="text-stone-400 p-1 shrink-0">
-                    {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                  </div>
-                </button>
-
-                {isExpanded && (
-                  <div className="px-5 pb-6 pt-1 border-t border-obsidian-850 font-mono text-xs text-stone-300 space-y-3 animate-fadeIn">
-                    <span className="text-gold font-bold tracking-wider block text-[10px]">
-                      SPECIFICATIONS:
-                    </span>
-                    <div className="space-y-2 font-sans">
-                      {mod.topics.map((t, idx) => (
-                        <div key={idx} className="flex items-start gap-2.5 text-stone-300 text-xs">
-                          <Check size={14} className="text-gold shrink-0 mt-0.5" />
-                          <span>{t}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
         </div>
       </div>
     </section>

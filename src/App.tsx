@@ -16,18 +16,12 @@ import { ChromaticAmbientCanvas } from './components/ui/ChromaticAmbientCanvas';
 import { ForexHeroSection } from './components/sections/ForexHeroSection';
 import { EditorialQuoteDivider } from './components/sections/EditorialQuoteDivider';
 import { TraderProfile } from './components/sections/TraderProfile';
-import { CurrencyWatchingSection } from './components/sections/CurrencyWatchingSection';
+import { MarketArtifactSection } from './components/sections/MarketArtifactSection';
 import { GlobalForexMarket } from './components/sections/GlobalForexMarket';
-import { CurrencyStrengthSection } from './components/sections/CurrencyStrengthSection';
-import { ForexSessionsSection } from './components/sections/ForexSessionsSection';
 import { LiquiditySection } from './components/sections/LiquiditySection';
-import { ForexDashboardSection } from './components/sections/ForexDashboardSection';
-import { EquityCurveSection } from './components/sections/EquityCurveSection';
-import { ForexJournalSection } from './components/sections/ForexJournalSection';
+import { ForexSessionsSection } from './components/sections/ForexSessionsSection';
 import { MacroLayerSection } from './components/sections/MacroLayerSection';
-import { PsychologySection } from './components/sections/PsychologySection';
 import { PlaybookCurriculumSection } from './components/sections/PlaybookCurriculumSection';
-import { MentorshipPricingSection } from './components/sections/MentorshipPricingSection';
 import { CommunitySection } from './components/sections/CommunitySection';
 import { ContactSection } from './components/sections/ContactSection';
 import { FinalCTASection } from './components/sections/FinalCTASection';
@@ -58,7 +52,10 @@ export function App() {
 
     gsap.ticker.lagSmoothing(0);
 
+    (window as any).__lenis = lenis;
+
     return () => {
+      delete (window as any).__lenis;
       lenis.destroy();
     };
   }, []);
@@ -98,14 +95,14 @@ export function App() {
         />
 
         {/* Compact Floating Editorial Navigation */}
-        <Navbar onOpenCommand={() => setIsCommandOpen(true)} />
+        <Navbar />
 
-        {/* Main Continuous Forex Poster Sequence */}
+        {/* Main Continuous Forex Poster Sequence — 11-Step Target Architecture */}
         <main className="relative z-10">
-          {/* HERO: Asymmetrical Poster Composition + 3D Currency Core */}
+          {/* 01 — HERO */}
           <ForexHeroSection />
 
-          {/* TRANSITION STATEMENT 01 */}
+          {/* EDITORIAL TRANSITION 01 */}
           <EditorialQuoteDivider
             quote={editorialQuotes.afterHero.quote}
             subtitle={editorialQuotes.afterHero.subtitle}
@@ -113,68 +110,34 @@ export function App() {
             index="01"
           />
 
-          {/* SECTION 01: IDENTITY / OPERATOR PROFILE */}
+          {/* 02 — IDENTITY / ABOUT */}
           <TraderProfile />
 
-          {/* SECTION 02: "EVERY CURRENCY HAS A STORY" */}
-          <CurrencyWatchingSection />
+          {/* SECTION 02 — THE MARKET ARTIFACT (BRIDGE TO INSTRUMENTS) */}
+          <MarketArtifactSection />
 
-          {/* SECTION 03: THE FOREX UNIVERSE CONSTELLATION */}
+          {/* 03 — FOREX UNIVERSE */}
           <GlobalForexMarket />
 
-          {/* SECTION 04: CURRENCY STRENGTH MATRIX */}
-          <CurrencyStrengthSection />
-
-          {/* TRANSITION STATEMENT 02 */}
-          <EditorialQuoteDivider
-            quote={editorialQuotes.sessions.quote}
-            subtitle={editorialQuotes.sessions.subtitle}
-            accent="gold"
-            index="02"
-          />
-
-          {/* SECTION 05: SESSIONS & 3D WORLD CLOCK */}
-          <ForexSessionsSection />
-
-          {/* SECTION 06: LIQUIDITY — SIGNATURE CRIMSON MOMENT */}
+          {/* 04 — LIQUIDITY */}
           <LiquiditySection />
 
-          {/* SECTION 07: THE PORTFOLIO & FLOATING 3D TILES */}
-          <ForexDashboardSection />
+          {/* 05 — SESSIONS */}
+          <ForexSessionsSection />
 
-          {/* SECTION 08: THE EQUITY CURVE */}
-          <EquityCurveSection />
-
-          {/* TRANSITION STATEMENT 03 */}
-          <EditorialQuoteDivider
-            quote={editorialQuotes.performance.quote}
-            subtitle={editorialQuotes.performance.subtitle}
-            accent="gold"
-            index="03"
-          />
-
-          {/* SECTION 09: THE TRADE JOURNAL & FILTER MATRIX */}
-          <ForexJournalSection />
-
-          {/* SECTION 10: THE MACRO LAYER & EVENT RADAR */}
+          {/* 06 — FUNDAMENTALS OF FOREX */}
           <MacroLayerSection />
 
-          {/* SECTION 11: TRADING PSYCHOLOGY — HIGH TYPOGRAPHY & NEGATIVE SPACE */}
-          <PsychologySection />
-
-          {/* SECTION 12: VEER CURRICULUM ARCHITECTURE */}
+          {/* 07 — BEGINNER GUIDE */}
           <PlaybookCurriculumSection />
 
-          {/* SECTION 13: MENTORSHIP PRICING & ONBOARDING */}
-          <MentorshipPricingSection />
-
-          {/* SECTION 14: COMMUNITY */}
+          {/* 08 — COMMUNITY */}
           <CommunitySection />
 
-          {/* SECTION 15: CONTACT & DESK */}
+          {/* 09 — CONTACT */}
           <ContactSection />
 
-          {/* FINAL SCREEN: READ THE MARKET. BUILD THE PROCESS. */}
+          {/* 10 — FINAL STATEMENT */}
           <FinalCTASection />
         </main>
 

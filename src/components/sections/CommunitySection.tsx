@@ -1,61 +1,75 @@
 import React from 'react';
-import { Users, MessageSquare, ArrowUpRight } from 'lucide-react';
+import { Users, MessageSquare, ArrowRight, BookOpen, GraduationCap } from 'lucide-react';
+import { contactConfig } from '../../data/contactConfig';
 
 export function CommunitySection() {
+  const discord = contactConfig.channels.find((c) => c.category === 'DISCORD');
+  const telegram = contactConfig.channels.find((c) => c.category === 'TELEGRAM');
+
   return (
-    <section id="community" className="py-28 sm:py-36 bg-transparent border-t border-white/[0.08] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
-        <div className="inline-flex items-center gap-2 font-mono text-xs text-gold mb-3">
-          <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-          <span className="tracking-widest uppercase font-semibold">SECTION 14 — VEER COMMUNITY</span>
+    <section id="community" className="py-24 sm:py-32 bg-transparent border-t border-white/[0.08] relative select-none">
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12">
+        {/* Section Header */}
+        <div className="mb-12">
+          <div className="inline-flex items-center gap-2 font-mono text-xs text-gold mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
+            <span className="tracking-widest uppercase font-semibold">08 — LEARNING COMMUNITY</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-black text-cream tracking-tight mb-4">
+            EDUCATIONAL <span className="text-gold-gradient">COMMUNITY.</span>
+          </h2>
+
+          <p className="max-w-2xl text-stone-300 text-xs sm:text-sm md:text-base font-sans font-light leading-relaxed">
+            Connect with like-minded Forex students, exchange objective market structure observations, discuss macroeconomic research, and learn structured institutional concepts in a zero-noise environment.
+          </p>
         </div>
 
-        <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-black text-cream tracking-tight mb-4 break-words">
-          JOIN THE <span className="text-gold-gradient">COMMUNITY</span>
-        </h2>
-
-        <p className="max-w-2xl text-stone-300 text-sm sm:text-base font-sans font-light leading-relaxed mb-12">
-          Connect with disciplined Forex operators, exchange live market structure analysis, review trade journals, and refine execution edge in a zero-noise institutional environment.
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl font-mono text-xs">
-          <div className="p-6 sm:p-8 rounded-2xl bg-obsidian-900/60 border border-obsidian-800 hover:border-gold/40 transition-all flex flex-col justify-between">
+        {/* Clean Educational Community Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl font-mono text-xs">
+          {/* Discord Card */}
+          <div className="p-7 sm:p-8 rounded-3xl bg-gradient-to-b from-obsidian-900/90 to-obsidian-950 border border-white/[0.08] hover:border-gold/40 transition-all flex flex-col justify-between group shadow-xl">
             <div>
-              <div className="text-gold font-bold text-lg mb-2 flex items-center gap-3">
-                <Users size={20} />
-                <span>DISCORD TRADING DESK</span>
+              <div className="text-gold font-bold text-lg mb-3 flex items-center gap-2.5">
+                <Users size={20} className="text-gold" />
+                <span className="font-display font-black tracking-tight text-xl">STUDY & RESEARCH DESK</span>
               </div>
               <p className="text-stone-300 text-xs sm:text-sm font-sans font-light leading-relaxed mb-8">
-                Daily London & New York session breakdown channels, institutional trade thesis discussion, and weekly live Q&A with Dharam Veer Singh Kirar.
+                Structured learner forums dedicated to market structure homework, weekly educational session reviews, and collaborative concept exploration alongside Dharam Veer Singh Kirar.
               </p>
             </div>
             <a
-              href="#pricing"
-              className="inline-flex items-center gap-2 text-cream hover:text-gold font-bold transition text-xs"
+              href={discord?.url || '#contact'}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-cream hover:text-gold font-bold transition text-xs tracking-wider"
+              data-cursor="OPEN"
             >
-              <span>ACCESS COMMUNITY DESK</span>
-              <ArrowUpRight size={14} />
+              <span>ACCESS LEARNING DISCORD</span>
+              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
 
-          <div className="p-6 sm:p-8 rounded-2xl bg-obsidian-900/60 border border-obsidian-800 hover:border-gold/40 transition-all flex flex-col justify-between">
+          {/* Telegram Card */}
+          <div className="p-7 sm:p-8 rounded-3xl bg-gradient-to-b from-obsidian-900/90 to-obsidian-950 border border-white/[0.08] hover:border-cyan-highlight/40 transition-all flex flex-col justify-between group shadow-xl">
             <div>
-              <div className="text-gold font-bold text-lg mb-2 flex items-center gap-3">
-                <MessageSquare size={20} />
-                <span>TELEGRAM ALERTS</span>
+              <div className="text-cyan-highlight font-bold text-lg mb-3 flex items-center gap-2.5">
+                <MessageSquare size={20} className="text-cyan-highlight" />
+                <span className="font-display font-black tracking-tight text-xl">RESEARCH BRIEFS</span>
               </div>
               <p className="text-stone-300 text-xs sm:text-sm font-sans font-light leading-relaxed mb-8">
-                High-confluence session overlap alerts, Tier-1 economic event warnings, and institutional macro notes directly from the research desk.
+                Educational session summaries, central bank policy schedules, and sovereign currency macro notes provided directly for academic study and chart context.
               </p>
             </div>
             <a
-              href="https://telegram.org"
+              href={telegram?.url || '#contact'}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 text-cream hover:text-gold font-bold transition text-xs"
+              className="inline-flex items-center gap-2 text-cream hover:text-cyan-highlight font-bold transition text-xs tracking-wider"
+              data-cursor="OPEN"
             >
-              <span>CONNECT TELEGRAM FEED</span>
-              <ArrowUpRight size={14} />
+              <span>JOIN RESEARCH TELEGRAM</span>
+              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         </div>

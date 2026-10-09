@@ -1,352 +1,513 @@
-import React, { useState } from 'react';
-import { forexPairs } from '../../data/forexPairs';
-import { ForexPair } from '../../types';
-import { ArrowUpRight, TrendingUp, TrendingDown, Layers, Share2, Grid, X, Shield, Activity, Zap } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useGSAP } from '@gsap/react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import {
+  universeInstruments,
+  InstrumentSpecimen,
+  UniverseCategory,
+} from '../../data/forexUniverse';
+import { InstrumentPortrait } from '../ui/InstrumentPortrait';
+import { Compass, ArrowRight } from 'lucide-react';
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export function GlobalForexMarket() {
-  const [viewMode, setViewMode] = useState<'NETWORK' | 'GRID'>('NETWORK');
-  const [filter, setFilter] = useState<'ALL' | 'MAJOR' | 'CROSS' | 'METAL'>('ALL');
-  const [selectedPair, setSelectedPair] = useState<ForexPair | null>(null);
-  const [hoveredPair, setHoveredPair] = useState<ForexPair | null>(null);
+  const [activeCategory, setActiveCategory] = useState<UniverseCategory>('ALL');
+  const [selectedId, setSelectedId] = useState<string>('xauusd');
 
-  const filteredPairs = forexPairs.filter(p => filter === 'ALL' || p.category === filter);
+  const sectionRef = useRef<HTMLElement>(null);
+  const detailPanelRef = useRef<HTMLDivElement>(null);
 
-  // Constellation coordinate mapping for visual node network
-  const constellationNodes = [
-    { id: 'fp-1', x: 28, y: 35, category: 'MAJOR' },
-    { id: 'fp-2', x: 42, y: 22, category: 'MAJOR' },
-    { id: 'fp-3', x: 68, y: 30, category: 'MAJOR' },
-    { id: 'fp-7', x: 74, y: 48, category: 'MAJOR' },
-    { id: 'fp-5', x: 72, y: 68, category: 'MAJOR' },
-    { id: 'fp-6', x: 50, y: 78, category: 'MAJOR' },
-    { id: 'fp-9', x: 26, y: 65, category: 'MAJOR' },
-    { id: 'fp-10', x: 34, y: 15, category: 'CROSS' },
-    { id: 'fp-11', x: 48, y: 45, category: 'CROSS' },
-    { id: 'fp-8', x: 58, y: 18, category: 'CROSS' },
-    { id: 'fp-4', x: 84, y: 24, category: 'METAL' },
-    { id: 'fp-12', x: 88, y: 42, category: 'METAL' },
+  // Filter instruments by category ('ALL', 'METAL', 'DIGITAL ASSET')
+  const filteredInstruments = universeInstruments.filter(
+    (item) => activeCategory === 'ALL' || item.category === activeCategory
+  );
+
+  // Active instrument object (safely resolved)
+  const current =
+    filteredInstruments.find((item) => item.id === selectedId) ||
+    universeInstruments.find((item) => item.id === selectedId) ||
+    filteredInstruments[0] ||
+    universeInstruments[0];
+
+  // GSAP scroll entrance animation
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
+        },
+      });
+
+      tl.from('.universe-label', {
+        opacity: 0,
+        y: 15,
+        duration: 0.5,
+        ease: 'power3.out',
+      })
+        .from(
+          '.universe-headline',
+          {
+            opacity: 0,
+            y: 25,
+            duration: 0.7,
+            ease: 'power3.out',
+          },
+          '-=0.3'
+        )
+        .from(
+          '.universe-copy',
+          {
+            opacity: 0,
+            y: 15,
+            duration: 0.6,
+            ease: 'power3.out',
+          },
+          '-=0.3'
+        )
+        .from(
+          '.universe-categories',
+          {
+            opacity: 0,
+            y: 15,
+            duration: 0.5,
+            ease: 'power3.out',
+          },
+          '-=0.3'
+        )
+        .from(
+          '.universe-nav',
+          {
+            opacity: 0,
+            x: -20,
+            duration: 0.6,
+            ease: 'power3.out',
+          },
+          '-=0.2'
+        )
+        .from(
+          detailPanelRef.current,
+          {
+            opacity: 0,
+            y: 30,
+            duration: 0.7,
+            ease: 'power3.out',
+          },
+          '-=0.4'
+        );
+    },
+    { scope: sectionRef }
+  );
+
+  // Bidirectional synchronization with the Market Artifact section
+  useEffect(() => {
+    const syncHandler = (e: Event) => {
+      const customEvent = e as CustomEvent<{ id: string }>;
+      if (customEvent.detail?.id) {
+        const match = universeInstruments.find((item) => item.id === customEvent.detail.id);
+        if (match && match.id !== selectedId) {
+          if (detailPanelRef.current) {
+            gsap.fromTo(
+              detailPanelRef.current,
+              { opacity: 0.35, y: 12 },
+              { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' }
+            );
+          }
+          setSelectedId(match.id);
+        }
+      }
+    };
+    window.addEventListener('veer:select-specimen', syncHandler);
+    return () => window.removeEventListener('veer:select-specimen', syncHandler);
+  }, [selectedId]);
+
+  // Handle instrument selection with smooth GSAP crossfade and artifact sync
+  const handleSelectInstrument = (inst: InstrumentSpecimen) => {
+    if (inst.id === selectedId) return;
+
+    if (detailPanelRef.current) {
+      gsap.fromTo(
+        detailPanelRef.current,
+        { opacity: 0.35, y: 12 },
+        { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' }
+      );
+    }
+    setSelectedId(inst.id);
+
+    // Sync with Market Artifact section
+    window.dispatchEvent(
+      new CustomEvent('veer:select-specimen', {
+        detail: { id: inst.id, symbol: inst.symbol },
+      })
+    );
+  };
+
+  // Handle category switch
+  const handleCategoryChange = (cat: UniverseCategory) => {
+    if (cat === activeCategory) return;
+    setActiveCategory(cat);
+    const newItems = universeInstruments.filter(
+      (i) => cat === 'ALL' || i.category === cat
+    );
+    if (newItems.length > 0 && !newItems.some((i) => i.id === selectedId)) {
+      handleSelectInstrument(newItems[0]);
+    }
+  };
+
+  const categories: { id: UniverseCategory; label: string; count: number }[] = [
+    { id: 'ALL', label: 'ALL', count: 4 },
+    { id: 'METAL', label: 'METALS', count: 2 },
+    { id: 'DIGITAL ASSET', label: 'DIGITAL ASSETS', count: 2 },
   ];
 
   return (
-    <section id="universe" className="py-28 sm:py-36 bg-transparent border-t border-white/[0.08] relative select-none">
-      <span id="forex-market" className="absolute -top-24" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
-          <div>
-            <div className="flex items-center gap-2 font-mono text-xs text-gold mb-3">
-              <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-              <span className="tracking-widest uppercase font-semibold">SECTION 03 — INSTRUMENT UNIVERSE</span>
-            </div>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-black text-cream tracking-tight break-words">
-              THE FOREX <span className="text-gold-gradient">UNIVERSE</span>
-            </h2>
-            <p className="text-stone-400 font-sans text-xs sm:text-sm font-light mt-2 max-w-xl">
-              Interactive constellation map of G8 fiat majors, cross volatility corridors, and sovereign spot precious metals. Avoid static tables; trace liquidity relationships directly.
-            </p>
-          </div>
+    <section
+      ref={sectionRef}
+      id="universe"
+      className="py-28 sm:py-36 bg-transparent border-t border-white/[0.08] relative overflow-hidden select-none"
+    >
+      {/* 1. Subtle World-Market Contour Visual Background */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.07] overflow-hidden flex items-center justify-center">
+        <svg
+          viewBox="0 0 1200 600"
+          className="w-full h-full object-cover"
+          aria-hidden="true"
+        >
+          <path
+            d="M 100 300 Q 300 150 600 300 T 1100 300"
+            fill="none"
+            stroke="#D6B45A"
+            strokeWidth="1.5"
+            strokeDasharray="4 8"
+          />
+          <path
+            d="M 150 350 Q 400 200 650 350 T 1150 350"
+            fill="none"
+            stroke="#38BDF8"
+            strokeWidth="1"
+            strokeDasharray="6 6"
+          />
+          <circle cx="300" cy="225" r="4" fill="#D6B45A" />
+          <circle cx="600" cy="300" r="5" fill="#38BDF8" />
+          <circle cx="900" cy="225" r="4" fill="#E5C56C" />
+          <line x1="300" y1="225" x2="600" y2="300" stroke="#FAF7F2" strokeWidth="0.8" strokeDasharray="2 4" />
+          <line x1="600" y1="300" x2="900" y2="225" stroke="#FAF7F2" strokeWidth="0.8" strokeDasharray="2 4" />
+        </svg>
+      </div>
 
-          {/* View Mode & Filter Switchers */}
-          <div className="flex flex-wrap items-center gap-3">
-            {/* Network vs Grid Toggle */}
-            <div className="flex bg-obsidian-950 p-1 rounded-xl border border-obsidian-800 font-mono text-xs">
-              <button
-                onClick={() => setViewMode('NETWORK')}
-                className={`px-3 py-1.5 rounded-lg transition-all duration-200 flex items-center gap-1.5 ${
-                  viewMode === 'NETWORK'
-                    ? 'bg-gold text-obsidian-950 font-bold shadow'
-                    : 'text-stone-400 hover:text-stone-200'
-                }`}
-                data-cursor="OPEN"
-              >
-                <Share2 size={13} />
-                <span>NODE NETWORK</span>
-              </button>
-              <button
-                onClick={() => setViewMode('GRID')}
-                className={`px-3 py-1.5 rounded-lg transition-all duration-200 flex items-center gap-1.5 ${
-                  viewMode === 'GRID'
-                    ? 'bg-gold text-obsidian-950 font-bold shadow'
-                    : 'text-stone-400 hover:text-stone-200'
-                }`}
-                data-cursor="OPEN"
-              >
-                <Grid size={13} />
-                <span>CARDS</span>
-              </button>
-            </div>
+      {/* Dynamic Luminous Ambient Halo */}
+      <div
+        className="absolute top-1/3 right-1/4 w-[480px] h-[480px] rounded-full blur-[140px] pointer-events-none opacity-20 transition-all duration-1000"
+        style={{ background: current.theme.glowRgba }}
+      />
 
-            {/* Category Filter */}
-            <div className="flex bg-obsidian-900 p-1 rounded-xl border border-obsidian-800 font-mono text-xs overflow-x-auto no-scrollbar">
-              {(['ALL', 'MAJOR', 'CROSS', 'METAL'] as const).map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setFilter(cat)}
-                  className={`px-3 py-1.5 rounded-lg transition-all duration-200 whitespace-nowrap ${
-                    filter === cat
-                      ? 'bg-cream text-obsidian-950 font-bold shadow'
-                      : 'text-stone-400 hover:text-stone-200'
-                  }`}
-                  data-cursor="OPEN"
-                >
-                  {cat === 'ALL' ? 'ALL' : cat === 'MAJOR' ? 'MAJORS' : cat === 'CROSS' ? 'CROSSES' : 'METALS'}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* VIEW 1: VISUAL NODE NETWORK / CONSTELLATION MAP */}
-        {viewMode === 'NETWORK' && (
-          <div className="relative w-full h-[520px] sm:h-[620px] rounded-3xl bg-obsidian-950/80 border border-obsidian-800 shadow-2xl overflow-hidden p-6 flex flex-col justify-between">
-            {/* Constellation Grid Background */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(214,180,90,0.06),transparent_70%)] pointer-events-none" />
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none" />
-
-            {/* Central Gravitational Anchor: USD LIQUIDITY CORE */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none select-none z-10">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-obsidian-900/90 border border-gold/50 flex flex-col items-center justify-center shadow-[0_0_35px_rgba(214,180,90,0.25)]">
-                <span className="font-display font-black text-gold text-sm sm:text-base">USD</span>
-                <span className="font-mono text-[8px] text-stone-400">NEXUS</span>
-              </div>
-              <span className="font-mono text-[9px] text-stone-500 uppercase mt-2 tracking-widest">
-                G8 RESERVE EQUILIBRIUM
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+        {/* ======================================================== */}
+        {/* SECTION HERO                                             */}
+        {/* ======================================================== */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12 sm:mb-16">
+          <div className="space-y-4 max-w-2xl">
+            {/* Small Label */}
+            <div className="universe-label flex items-center gap-2 font-mono text-xs text-gold">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
+              <span className="tracking-widest uppercase font-semibold">
+                SECTION 03 — FOREX UNIVERSE
               </span>
             </div>
 
-            {/* Interconnecting SVG Network Vectors */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none">
-              {constellationNodes.map((n) => {
-                const isHovered = hoveredPair?.id === n.id;
-                return (
-                  <line
-                    key={n.id}
-                    x1="50%"
-                    y1="50%"
-                    x2={`${n.x}%`}
-                    y2={`${n.y}%`}
-                    stroke={isHovered ? '#D6B45A' : '#ffffff12'}
-                    strokeWidth={isHovered ? 2 : 1}
-                    strokeDasharray={n.category === 'CROSS' ? '3 3' : 'none'}
-                    className="transition-all duration-300"
-                  />
-                );
-              })}
-            </svg>
+            {/* Monumental Editorial Headline */}
+            <h2 className="universe-headline text-4xl sm:text-6xl md:text-7xl font-display font-black tracking-tight leading-[0.95] text-cream">
+              THE WORLD<br />
+              OF CURRENCIES.
+            </h2>
 
-            {/* Node Items */}
-            <div className="relative w-full h-full">
-              {forexPairs.map((pair) => {
-                const nodePos = constellationNodes.find((n) => n.id === pair.id);
-                if (!nodePos) return null;
-                const isMatch = filter === 'ALL' || pair.category === filter;
-                const isHovered = hoveredPair?.id === pair.id;
-                const isBullish = pair.trend === 'BULLISH';
+            {/* Supporting Copy */}
+            <p className="universe-copy text-stone-300 font-sans text-sm sm:text-base font-light leading-relaxed max-w-xl">
+              Explore the critical sovereign commodity and digital scarcity relationships against the US Dollar benchmark.
+            </p>
 
-                return (
-                  <div
-                    key={pair.id}
-                    style={{ left: `${nodePos.x}%`, top: `${nodePos.y}%` }}
-                    className={`absolute -translate-x-1/2 -translate-y-1/2 transition-all duration-300 z-20 ${
-                      isMatch ? 'opacity-100 scale-100' : 'opacity-20 scale-90 pointer-events-none'
-                    }`}
-                  >
-                    <button
-                      onClick={() => setSelectedPair(pair)}
-                      onMouseEnter={() => setHoveredPair(pair)}
-                      onMouseLeave={() => setHoveredPair(null)}
-                      className={`group px-3 py-2 rounded-2xl border backdrop-blur-xl transition-all duration-200 flex flex-col items-center ${
-                        isHovered
-                          ? 'bg-obsidian-900 border-gold shadow-[0_0_25px_rgba(214,180,90,0.4)] scale-110 -translate-y-1'
-                          : 'bg-obsidian-950/90 border-obsidian-750 hover:border-gold/40'
-                      }`}
-                      data-cursor="ANALYZE"
-                    >
-                      <div className="flex items-center gap-1.5">
-                        <span className={`w-1.5 h-1.5 rounded-full ${
-                          pair.category === 'METAL'
-                            ? 'bg-white shadow-[0_0_6px_#ffffff]'
-                            : isBullish
-                            ? 'bg-emerald-market shadow-[0_0_6px_#36D39A]'
-                            : 'bg-coral-market shadow-[0_0_6px_#D52B32]'
-                        }`} />
-                        <span className="font-display font-bold text-xs sm:text-sm text-cream group-hover:text-gold transition">
-                          {pair.symbol}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1 font-mono text-[9px] mt-0.5">
-                        <span className="text-stone-300">{pair.price}</span>
-                        <span className={isBullish ? 'text-emerald-market' : 'text-coral-market'}>
-                          {isBullish ? `+${pair.changePct}%` : `${pair.changePct}%`}
-                        </span>
-                      </div>
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Bottom Meta Cue */}
-            <div className="relative z-10 flex items-center justify-between font-mono text-[10px] text-stone-500 border-t border-obsidian-850 pt-3">
-              <span>● CLICK NODE TO OPEN COMPACT PAIR PANEL</span>
-              <span className="text-gold">12 LIQUIDITY CHANNELS MONITORED</span>
+            {/* Secondary Category Marker */}
+            <div className="pt-1 flex items-center gap-2 font-mono text-[10px] text-stone-400 tracking-widest uppercase">
+              <span className="text-gold/90 font-medium">PRECIOUS METALS</span>
+              <span>·</span>
+              <span className="text-cyan-400/90 font-medium">DIGITAL ASSETS</span>
+              <span>·</span>
+              <span className="text-stone-400">USD BENCHMARKS</span>
             </div>
           </div>
-        )}
 
-        {/* VIEW 2: TRADITIONAL / COMPACT SPECIMEN CARDS */}
-        {viewMode === 'GRID' && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {filteredPairs.map((pair) => {
-              const isBullish = pair.trend === 'BULLISH';
-              const isBearish = pair.trend === 'BEARISH';
+          {/* ======================================================== */}
+          {/* CATEGORY SWITCHING CONTROLS                              */}
+          {/* ======================================================== */}
+          <div className="universe-categories flex items-center p-1.5 rounded-xl bg-obsidian-950/80 border border-white/10 backdrop-blur-md">
+            {categories.map((cat) => {
+              const isActive = activeCategory === cat.id;
               return (
-                <div
-                  key={pair.id}
-                  onClick={() => setSelectedPair(pair)}
-                  className="p-5 sm:p-6 rounded-3xl card-specimen-glass hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_20px_45px_rgba(0,0,0,0.7)] group flex flex-col justify-between cursor-pointer transition-all duration-200"
-                  data-cursor="ANALYZE"
+                <button
+                  key={cat.id}
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => handleCategoryChange(cat.id)}
+                  className={`px-3.5 sm:px-4 py-2 rounded-lg font-mono text-xs font-bold transition-all duration-300 cursor-pointer flex items-center gap-1.5 ${
+                    isActive
+                      ? 'bg-gold text-obsidian-950 shadow-[0_0_16px_rgba(214,180,90,0.35)] scale-[1.02]'
+                      : 'text-stone-400 hover:text-cream hover:bg-white/[0.04]'
+                  }`}
                 >
-                  <div>
-                    <div className="flex items-center justify-between font-mono text-[10px] text-stone-400 mb-3">
-                      <span className="px-2 py-0.5 rounded-full border border-white/10 font-bold uppercase tracking-wider text-cream">
-                        {pair.category}
-                      </span>
-                      <span className="text-stone-500 font-mono">SPR: {pair.spreadPips}P</span>
-                    </div>
-
-                    <div className="flex items-baseline justify-between mt-2">
-                      <h3 className="font-display font-bold text-2xl text-cream group-hover:text-gold transition-colors">
-                        {pair.symbol}
-                      </h3>
-                      <div className="font-mono text-xs font-bold">
-                        <span className={isBullish ? 'text-emerald-market' : isBearish ? 'text-coral-market' : 'text-gold'}>
-                          {isBullish ? `+${pair.changePct}%` : `${pair.changePct}%`}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="text-[11px] text-stone-400 mb-2 font-sans">{pair.name}</div>
-                    <div className="font-mono text-2xl font-black text-cream tracking-tight my-1">
-                      {pair.price}
-                    </div>
-
-                    <div className="bg-obsidian-950/70 p-3 rounded-2xl border border-white/5 mt-3 text-[10px] font-mono space-y-1 backdrop-blur-md">
-                      <div className="flex justify-between text-stone-400">
-                        <span className="text-stone-500">STRUCTURE:</span>
-                        <span className="text-stone-300 font-semibold truncate ml-2">{pair.structure}</span>
-                      </div>
-                      <div className="flex justify-between text-stone-400">
-                        <span className="text-stone-500">CONFIDENCE:</span>
-                        <span className="text-gold font-bold">{pair.confidencePct}%</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-gold group-hover:translate-x-0.5 transition-transform">
-                    <span>INSPECT PAIR</span>
-                    <ArrowUpRight size={13} />
-                  </div>
-                </div>
+                  <span>{cat.label}</span>
+                  <span
+                    className={`text-[9.5px] px-1.5 py-0.5 rounded-full ${
+                      isActive
+                        ? 'bg-obsidian-950/30 text-obsidian-950 font-extrabold'
+                        : 'bg-white/[0.06] text-stone-400'
+                    }`}
+                  >
+                    {cat.count}
+                  </span>
+                </button>
               );
             })}
           </div>
-        )}
+        </div>
 
-        {/* COMPACT PAIR PANEL MODAL (Opened on click) */}
-        {selectedPair && (
+        {/* ======================================================== */}
+        {/* EDITORIAL STORYTELLING INTERSTITIAL                      */}
+        {/* ======================================================== */}
+        <div className="mb-10 py-3 px-5 rounded-xl bg-obsidian-950/60 border border-white/[0.06] flex items-center justify-between text-stone-400 font-mono text-[10px] sm:text-xs tracking-wider">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold/70" />
+            <span className="text-stone-300 font-semibold uppercase">EVERY PAIR IS A RELATIONSHIP</span>
+          </div>
+          <span className="hidden md:inline text-stone-600">//</span>
+          <span className="hidden md:inline text-stone-400">EVERY RELATIONSHIP HAS CONTEXT</span>
+          <span className="hidden lg:inline text-stone-600">//</span>
+          <span className="hidden lg:inline text-cream/90 font-medium">EVERY CONTEXT CHANGES HOW WE READ THE MARKET</span>
+        </div>
+
+        {/* ======================================================== */}
+        {/* MASTER-DETAIL ATLAS ARCHITECTURE                         */}
+        {/* Left ~35%: Instrument Roster | Right ~65%: Featured View */}
+        {/* ======================================================== */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* ------------------------------------------------------ */}
+          {/* LEFT COLUMN: Instrument Navigation (Exactly 4 items)  */}
+          {/* ------------------------------------------------------ */}
+          <div className="lg:col-span-4 universe-nav flex flex-col space-y-3">
+            <div className="flex items-center justify-between mb-1 px-1">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-stone-400 font-semibold">
+                INSTRUMENT ROSTER ({filteredInstruments.length})
+              </span>
+              <span className="font-mono text-[9px] text-gold uppercase tracking-wider">
+                SELECT TO EXPAND
+              </span>
+            </div>
+
+            {/* Instrument List Roster with Hover & Active States */}
+            <div className="flex flex-col gap-3">
+              {filteredInstruments.map((inst) => {
+                const isSelected = inst.id === current.id;
+                return (
+                  <button
+                    key={inst.id}
+                    role="tab"
+                    aria-selected={isSelected}
+                    onClick={() => handleSelectInstrument(inst)}
+                    className={`w-full text-left p-4 sm:p-5 rounded-2xl font-mono transition-all duration-300 cursor-pointer relative overflow-hidden group border ${
+                      isSelected
+                        ? 'bg-obsidian-950/95 scale-[1.01]'
+                        : 'bg-obsidian-950/60 border-white/[0.08] hover:border-white/20 hover:bg-obsidian-900/80 hover:translate-x-1 sm:hover:translate-x-1.5'
+                    }`}
+                    style={{
+                      borderColor: isSelected ? inst.theme.activeBorder : undefined,
+                      boxShadow: isSelected ? `0 8px 30px -6px ${inst.theme.glowRgba}` : undefined,
+                    }}
+                  >
+                    {/* Soft dynamic accent aura on active item */}
+                    {isSelected && (
+                      <div
+                        className="absolute top-0 right-0 w-32 h-32 rounded-full blur-2xl opacity-20 pointer-events-none transition-all duration-500"
+                        style={{ background: inst.theme.accentHex }}
+                      />
+                    )}
+
+                    <div className="flex items-center justify-between gap-3 relative z-10">
+                      <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
+                        {/* Elegant Accent Indicator */}
+                        <div
+                          className={`w-1 rounded-full transition-all duration-300 ${
+                            isSelected
+                              ? 'h-8 opacity-100'
+                              : 'h-4 bg-white/10 group-hover:h-6 group-hover:bg-white/30 group-hover:opacity-80'
+                          }`}
+                          style={{
+                            backgroundColor: isSelected ? inst.theme.accentHex : undefined,
+                            boxShadow: isSelected ? `0 0 10px ${inst.theme.accentHex}` : undefined,
+                          }}
+                        />
+
+                        <div className="min-w-0">
+                          {/* Symbol & Category Tag */}
+                          <div className="flex items-center gap-2">
+                            <span
+                              className={`font-display font-black text-lg sm:text-xl tracking-tight transition-colors duration-200 ${
+                                isSelected ? 'text-cream' : 'text-stone-300 group-hover:text-cream'
+                              }`}
+                            >
+                              {inst.symbol}
+                            </span>
+                            <span
+                              className="font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded font-semibold border"
+                              style={{
+                                backgroundColor: isSelected ? `${inst.theme.accentHex}18` : 'rgba(255,255,255,0.03)',
+                                color: isSelected ? inst.theme.accentHex : '#A8A29E',
+                                borderColor: isSelected ? `${inst.theme.accentHex}40` : 'rgba(255,255,255,0.08)',
+                              }}
+                            >
+                              {inst.category}
+                            </span>
+                          </div>
+
+                          {/* Subtitle Name: e.g. "Gold / US Dollar" (Fully Visible, No Truncation) */}
+                          <span
+                            className={`font-sans text-xs sm:text-sm font-light mt-1 block transition-colors duration-200 ${
+                              isSelected ? 'text-stone-200' : 'text-stone-400 group-hover:text-stone-300'
+                            }`}
+                          >
+                            {inst.name}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Right Arrow / Selection Indicator */}
+                      <div className="flex items-center gap-2 shrink-0">
+                        <ArrowRight
+                          size={16}
+                          className={`transition-all duration-300 ${
+                            isSelected
+                              ? 'opacity-100 translate-x-0'
+                              : 'opacity-0 -translate-x-2 group-hover:opacity-60 group-hover:translate-x-0 text-stone-500'
+                          }`}
+                          style={{ color: isSelected ? inst.theme.accentHex : undefined }}
+                        />
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* ------------------------------------------------------ */}
+          {/* RIGHT COLUMN: Featured Instrument Experience           */}
+          {/* ------------------------------------------------------ */}
           <div
-            role="dialog"
-            aria-modal="true"
-            aria-label={`${selectedPair.symbol} Inspection Panel`}
-            className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-obsidian-950/85 backdrop-blur-xl animate-fadeIn"
-            onClick={() => setSelectedPair(null)}
+            ref={detailPanelRef}
+            className="lg:col-span-8 p-6 sm:p-8 lg:p-10 rounded-2xl bg-obsidian-950/90 border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-xl transition-all duration-500"
+            style={{
+              boxShadow: `0 24px 80px -20px ${current.theme.glowRgba}`,
+              borderColor: `${current.theme.accentHex}40`,
+            }}
           >
-            <div
-              className="w-full max-w-lg bg-obsidian-900 border border-gold/50 rounded-3xl p-6 sm:p-8 shadow-[0_25px_80px_rgba(0,0,0,0.9)] gold-glow-md space-y-5 animate-scaleUp"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Header */}
-              <div className="flex items-start justify-between border-b border-obsidian-800 pb-4">
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-gold/15 border border-gold/30 text-gold uppercase font-bold">
-                      {selectedPair.category} SPECIMEN
-                    </span>
-                    <span className="font-mono text-xs text-stone-400">VEER OBSERVATORY</span>
-                  </div>
-                  <h3 className="font-display font-black text-3xl sm:text-4xl text-cream">
-                    {selectedPair.symbol}
+            {/* Top Bar: Symbol, Name, Category Pill */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
+              <div>
+                <div className="flex items-center gap-3 mb-1">
+                  <h3 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-cream tracking-tight">
+                    {current.symbol}
                   </h3>
-                  <div className="text-xs text-stone-400 font-sans">{selectedPair.name}</div>
-                </div>
-
-                <button
-                  onClick={() => setSelectedPair(null)}
-                  className="p-2 rounded-xl bg-obsidian-950 border border-obsidian-800 text-stone-400 hover:text-gold"
-                  aria-label="Close pair panel"
-                >
-                  <X size={18} />
-                </button>
-              </div>
-
-              {/* Price & Trend Summary */}
-              <div className="grid grid-cols-2 gap-3 font-mono">
-                <div className="p-3.5 rounded-2xl bg-obsidian-950 border border-obsidian-850">
-                  <span className="text-stone-500 block text-[9px] uppercase">MID QUOTE</span>
-                  <span className="text-2xl font-black text-cream">{selectedPair.price}</span>
-                  <span className={`text-[10px] font-bold block mt-0.5 ${
-                    selectedPair.trend === 'BULLISH' ? 'text-emerald-market' : 'text-coral-market'
-                  }`}>
-                    {selectedPair.changePips > 0 ? `+${selectedPair.changePips} PIPS` : `${selectedPair.changePips} PIPS`} ({selectedPair.changePct}%)
+                  <span
+                    className="px-2.5 py-1 rounded font-mono text-[9px] font-bold tracking-widest uppercase border"
+                    style={{
+                      backgroundColor: `${current.theme.accentHex}15`,
+                      color: current.theme.accentHex,
+                      borderColor: `${current.theme.accentHex}40`,
+                    }}
+                  >
+                    {current.category}
                   </span>
                 </div>
+                <p className="font-mono text-xs sm:text-sm text-stone-400 tracking-wider uppercase font-semibold">
+                  {current.name}
+                </p>
+              </div>
 
-                <div className="p-3.5 rounded-2xl bg-obsidian-950 border border-obsidian-850">
-                  <span className="text-stone-500 block text-[9px] uppercase">OPERATOR BIAS</span>
-                  <span className="text-xl font-black text-gold">{selectedPair.trend}</span>
-                  <span className="text-[10px] text-stone-400 block mt-0.5">
-                    CONFIDENCE: <span className="text-cream font-bold">{selectedPair.confidencePct}%</span>
+              {/* Pair DNA Tags */}
+              <div className="flex flex-wrap gap-1.5 self-start sm:self-center">
+                {current.pairDNA.map((dna) => (
+                  <span
+                    key={dna}
+                    className="font-mono text-[8.5px] uppercase tracking-wider px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 text-stone-300 font-medium"
+                  >
+                    {dna}
                   </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Core Exploration Grid: 4 Dimensions Left, Portrait Right */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 my-8 items-center">
+              {/* Left Column: Market Context Dimensions 4 Boxes (7 cols) */}
+              <div className="lg:col-span-7 flex flex-col justify-center">
+                {/* Header Tag */}
+                <div className="flex items-center gap-2 mb-4 font-mono text-[10px] uppercase tracking-widest text-stone-400">
+                  <Compass size={13} className="text-gold" />
+                  <span className="font-bold text-cream">MARKET CONTEXT DIMENSIONS</span>
+                </div>
+
+                {/* 2x2 Grid of the 4 Dimension Boxes */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 font-mono text-xs">
+                  {/* 1. Liquidity */}
+                  <div className="p-4 rounded-xl bg-obsidian-900/60 border border-white/[0.06] hover:border-white/15 transition-all duration-300 flex flex-col justify-between min-h-[140px]">
+                    <span className="text-stone-500 text-[9.5px] uppercase tracking-wider block font-bold mb-2">
+                      LIQUIDITY
+                    </span>
+                    <p className="font-sans text-xs sm:text-[13px] text-stone-300 font-light leading-relaxed">
+                      {current.marketContext.liquidity}
+                    </p>
+                  </div>
+
+                  {/* 2. Macro */}
+                  <div className="p-4 rounded-xl bg-obsidian-900/60 border border-white/[0.06] hover:border-white/15 transition-all duration-300 flex flex-col justify-between min-h-[140px]">
+                    <span className="text-stone-500 text-[9.5px] uppercase tracking-wider block font-bold mb-2">
+                      MACRO
+                    </span>
+                    <p className="font-sans text-xs sm:text-[13px] text-stone-300 font-light leading-relaxed">
+                      {current.marketContext.macro}
+                    </p>
+                  </div>
+
+                  {/* 3. Session */}
+                  <div className="p-4 rounded-xl bg-obsidian-900/60 border border-white/[0.06] hover:border-white/15 transition-all duration-300 flex flex-col justify-between min-h-[140px]">
+                    <span className="text-stone-500 text-[9.5px] uppercase tracking-wider block font-bold mb-2">
+                      SESSION
+                    </span>
+                    <p className="font-sans text-xs sm:text-[13px] text-stone-300 font-light leading-relaxed">
+                      {current.marketContext.session}
+                    </p>
+                  </div>
+
+                  {/* 4. Relationship */}
+                  <div className="p-4 rounded-xl bg-obsidian-900/60 border border-white/[0.06] hover:border-white/15 transition-all duration-300 flex flex-col justify-between min-h-[140px]">
+                    <span className="text-stone-500 text-[9.5px] uppercase tracking-wider block font-bold mb-2">
+                      RELATIONSHIP
+                    </span>
+                    <p className="font-sans text-xs sm:text-[13px] text-stone-300 font-light leading-relaxed">
+                      {current.marketContext.relationship}
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              {/* Structure and Liquidity Depth */}
-              <div className="space-y-2.5 font-mono text-xs">
-                <div className="p-3.5 rounded-2xl bg-obsidian-950/70 border border-white/5 space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-stone-500">STRUCTURAL REGIME:</span>
-                    <span className="text-cream font-semibold text-right">{selectedPair.structure}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-stone-500">INTERBANK SPREAD:</span>
-                    <span className="text-gold font-bold">{selectedPair.spreadPips} PIPS</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-stone-500">SUPPORT BARRIER:</span>
-                    <span className="text-emerald-market font-bold">{selectedPair.support}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-stone-500">RESISTANCE SWEEP:</span>
-                    <span className="text-coral-market font-bold">{selectedPair.resistance}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Action Button */}
-              <div className="pt-2">
-                <a
-                  href="#portfolio"
-                  onClick={() => setSelectedPair(null)}
-                  className="w-full py-3 rounded-xl bg-gold text-obsidian-950 font-mono font-bold text-xs tracking-wider flex items-center justify-center gap-2 hover:bg-cream transition"
-                >
-                  <span>VIEW EXECUTION IN PORTFOLIO</span>
-                  <ArrowUpRight size={14} />
-                </a>
+              {/* Visual Instrument Portrait & Relationship Field (5 cols) */}
+              <div className="lg:col-span-5 flex flex-col items-center justify-center p-4 rounded-xl bg-obsidian-900/40 border border-white/[0.06]">
+                <InstrumentPortrait instrument={current} />
               </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </section>
   );

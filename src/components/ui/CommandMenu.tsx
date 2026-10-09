@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Terminal, ArrowRight, CornerDownLeft, X, Shield, Globe, Layers, BarChart3, BookOpen, Clock, HeartHandshake, Eye } from 'lucide-react';
+import { Search, Terminal, ArrowRight, CornerDownLeft, X, Shield, Globe, Layers, BarChart3, BookOpen, Clock, HeartHandshake, Eye, Compass } from 'lucide-react';
 
 interface CommandItem {
   id: string;
@@ -12,19 +12,16 @@ interface CommandItem {
 
 const commands: CommandItem[] = [
   { id: 'hero', title: 'OBSERVATORY HEADQUARTERS', category: 'OVERVIEW', targetId: 'hero', icon: <Terminal size={14} />, hint: 'Dharam Veer Singh Kirar' },
-  { id: 'about', title: 'OPERATOR PROFILE & PHILOSOPHY', category: 'IDENTITY', targetId: 'about', icon: <Shield size={14} />, hint: 'Discipline & Statistical Reality' },
-  { id: 'watching', title: 'EVERY CURRENCY HAS A STORY', category: 'CURRENCY', targetId: 'watching', icon: <Eye size={14} />, hint: 'G8 Sovereign Currency Artifact' },
-  { id: 'universe', title: 'THE FOREX UNIVERSE', category: 'MARKET', targetId: 'universe', icon: <Globe size={14} />, hint: 'Majors, Crosses, & Metals Constellation' },
-  { id: 'strength', title: 'CURRENCY STRENGTH MATRIX', category: 'STRENGTH', targetId: 'strength', icon: <BarChart3 size={14} />, hint: '3D Relative Power Spectrum' },
-  { id: 'sessions', title: 'THE MARKET CLOCK & SESSIONS', category: 'CHRONOLOGY', targetId: 'sessions', icon: <Clock size={14} />, hint: 'London / NY Overlap & Volatility' },
-  { id: 'liquidity', title: 'LIQUIDITY FLOW FIELD', category: 'ORDER FLOW', targetId: 'liquidity', icon: <Layers size={14} />, hint: 'BSL, SSL & Displacement Imbalances' },
-  { id: 'portfolio', title: 'PORTFOLIO & LIVE POSITIONS', category: 'EXECUTION', targetId: 'portfolio', icon: <BarChart3 size={14} />, hint: 'Audited Metric Matrix & Floating Tiles' },
-  { id: 'performance', title: 'THE EQUITY CURVE', category: 'METRICS', targetId: 'performance', icon: <BarChart3 size={14} />, hint: 'Institutional Capital Trajectory' },
-  { id: 'journal', title: 'TRADE JOURNAL & CASE STUDIES', category: 'AUDIT', targetId: 'journal', icon: <BookOpen size={14} />, hint: 'Execution Thesis & Lesson Logs' },
-  { id: 'macro', title: 'THE MACRO LAYER & EVENT RADAR', category: 'FUNDAMENTALS', targetId: 'macro', icon: <Globe size={14} />, hint: 'Central Banks & Scheduled Catalysts' },
-  { id: 'psychology', title: 'TRADING PSYCHOLOGY', category: 'MINDSET', targetId: 'psychology', icon: <Shield size={14} />, hint: 'Discipline, Patience & Impulse Control' },
-  { id: 'curriculum', title: 'VEER CURRICULUM ARCHITECTURE', category: 'EDUCATION', targetId: 'curriculum', icon: <BookOpen size={14} />, hint: '01 Foundations to 08 Psychology' },
-  { id: 'contact', title: 'DESK INQUIRY & CONTACT', category: 'TERMINAL', targetId: 'contact', icon: <HeartHandshake size={14} />, hint: 'Direct Operational Communication' },
+  { id: 'about', title: 'IDENTITY & OPERATOR PHILOSOPHY', category: 'IDENTITY', targetId: 'about', icon: <Shield size={14} />, hint: 'Dharam Veer Singh Kirar' },
+  { id: 'market', title: 'THE MARKET ARTIFACT (XAU, XAG, BTC, ETH)', category: 'ARTIFACT', targetId: 'market', icon: <Compass size={14} />, hint: 'Every Market Has a Story' },
+  { id: 'universe', title: 'THE FOREX UNIVERSE', category: 'MARKET', targetId: 'universe', icon: <Globe size={14} />, hint: 'Majors, Crosses & Metals Educational Overview' },
+  { id: 'liquidity', title: 'LIQUIDITY CONCEPTS', category: 'ORDER FLOW', targetId: 'liquidity', icon: <Layers size={14} />, hint: 'BSL, SSL & Fair Value Imbalances' },
+  { id: 'sessions', title: 'MARKET SESSIONS & TIMELINE', category: 'CHRONOLOGY', targetId: 'sessions', icon: <Clock size={14} />, hint: 'Asian Session, London, New York & Overlap' },
+  { id: 'fundamentals', title: 'FUNDAMENTALS OF FOREX', category: 'MACRO', targetId: 'fundamentals', icon: <Globe size={14} />, hint: 'Interest Rates, Inflation, Central Banks & Employment' },
+  { id: 'guide', title: 'BEGINNER GUIDE', category: 'EDUCATION', targetId: 'guide', icon: <BookOpen size={14} />, hint: '01 Market Basics to 09 Psychology' },
+  { id: 'community', title: 'COMMUNITY & RESEARCH', category: 'COMMUNITY', targetId: 'community', icon: <HeartHandshake size={14} />, hint: 'Educational Discourse & Discussion' },
+  { id: 'contact', title: 'VERIFIED CONTACT CHANNELS', category: 'CONTACT', targetId: 'contact', icon: <HeartHandshake size={14} />, hint: 'Instagram, Telegram, Discord & Email' },
+  { id: 'conclusion', title: 'FINAL STATEMENT & EXPLORATION', category: 'CONCLUSION', targetId: 'conclusion', icon: <Terminal size={14} />, hint: 'Read the Market. Build the Process.' },
 ];
 
 interface CommandMenuProps {

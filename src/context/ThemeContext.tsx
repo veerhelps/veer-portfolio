@@ -1,14 +1,7 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { chromaticThemes, ChromaticSpecimen } from '../data/chromaticThemes';
+import React, { useEffect, useState } from 'react';
+import { chromaticThemes } from '../data/chromaticThemes';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-interface ThemeContextType {
-  activeTheme: string;
-  setActiveTheme: (themeKey: string) => void;
-  currentSpecimen: ChromaticSpecimen;
-}
-
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+import { ThemeContext } from './themeContextDef';
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [activeTheme, setActiveTheme] = useState<string>('dynamic');
@@ -21,20 +14,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const sections = [
       { id: 'hero', key: 'cosmic' },
       { id: 'about', key: 'opal' },
-      { id: 'watching', key: 'navy' },
-      { id: 'forex-market', key: 'navy' },
-      { id: 'strength', key: 'cosmic' },
-      { id: 'sessions', key: 'violet' },
+      { id: 'market', key: 'cosmic' },
+      { id: 'universe', key: 'navy' },
+      { id: 'structure', key: 'cosmic' },
       { id: 'liquidity', key: 'burgundy' },
-      { id: 'portfolio', key: 'opal' },
-      { id: 'performance', key: 'navy' },
-      { id: 'journal', key: 'cosmic' },
-      { id: 'macro', key: 'violet' },
-      { id: 'psychology', key: 'burgundy' },
-      { id: 'curriculum', key: 'opal' },
-      { id: 'pricing', key: 'cosmic' },
+      { id: 'sessions', key: 'violet' },
+      { id: 'fundamentals', key: 'navy' },
+      { id: 'guide', key: 'opal' },
       { id: 'community', key: 'navy' },
       { id: 'contact', key: 'violet' },
+      { id: 'conclusion', key: 'cosmic' },
     ];
 
     const triggers: ScrollTrigger[] = [];
@@ -121,12 +110,4 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       {children}
     </ThemeContext.Provider>
   );
-}
-
-export function useTheme() {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
 }
